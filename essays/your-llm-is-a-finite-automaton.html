@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your LLM Is a Finite Automaton — Topological Transmission Theory</title>
+<meta name="description" content="Why a transformer with a fixed context window is a finite automaton, and what actually makes it Turing complete.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul, ol { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Your LLM Is a Finite Automaton</h1>
+<p class="subtitle">Why a transformer with a fixed context window is a finite automaton, and what actually makes it Turing complete.</p>
+<p>GPT-4 has a 128K-token context window. Claude has 200K. These are often described as "thinking space"&nbsp;&mdash; the larger the window, the more the model can reason about. A popular line of recent research goes further: chain-of-thought prompting, where the model generates intermediate reasoning tokens, has been shown to make transformers Turing complete. The implication is that today's language models, with enough chain of thought, can compute anything computable.</p>
+<p>This is wrong. Here's why, and what actually makes the difference.</p>
+<h2>The finite automaton argument</h2>
+<p>A transformer with a fixed context window has a fixed number of possible states. For a window of <em>C</em> tokens over a vocabulary of size <em>V</em>, there are at most <em>V<sup>C</sup></em> distinguishable configurations. That's a large number&nbsp;&mdash; but it's a number. It's finite.</p>
+<p>A system with a finite number of states that transitions deterministically from one state to the next is, by definition, a finite automaton. It doesn't matter how clever the transition function is. It doesn't matter that a transformer is a universal function approximator within its context. After at most <em>V<sup>C</sup></em> steps, it must revisit a state it's seen before. Once it cycles, it cycles forever. No new computation happens.</p>
+<p>Chain of thought doesn't change this. CoT tokens are written <em>into</em> the context window, consuming space within the same finite state. The computation is richer&nbsp;&mdash; the model explores more of its state space before cycling&nbsp;&mdash; but the state space itself doesn't grow. A fixed window with chain of thought is still a finite automaton. Just a busier one.</p>
+<p>This contradicts the "CoT is Turing complete" narrative. What went wrong?</p>
+<h2>What the papers actually prove</h2>
+<p>Feng et al. (2023) proved that a constant-depth transformer generating intermediate tokens can simulate any Turing machine. Merrill &amp; Sabharwal (2024) showed that transformers with polynomial-length CoT can solve all problems in P. These are genuine results. But they share an assumption: <strong>the chain of thought is allowed to grow without bound as the input grows.</strong></p>
+<p>This means the context window must scale with the problem. A problem of size <em>n</em> gets a window of size poly(<em>n</em>). That's not how any deployed system works. GPT-4's window is 128K whether you give it a 10-word prompt or a 100K-word document. The window is a constant, not a function of the input.</p>
+<p>Li &amp; Wang (2025) got the precise result: the computational class of a transformer with window size <em>W</em> is exactly SPACE(<em>W</em>). For fixed <em>W</em>, that's a finite complexity class. Powerful&nbsp;&mdash; but bounded.</p>
+<h2>What actually makes it Turing complete</h2>
+<p>The answer is almost embarrassingly simple: an external read/write store.</p>
+<p>Give a transformer access to a file system, a database, a persistent key-value store&nbsp;&mdash; anything it can read from, write to, and that persists between steps&nbsp;&mdash; and the composition is a Turing machine. The context window serves as the finite state control. The external store serves as the tape. The model reads from the store into its window, computes, writes back to the store, and moves on. This is literally the definition of a Turing machine: finite control plus infinite tape.</p>
+<p>We proved this formally in Lean 4&nbsp;&mdash; a step-for-step simulation showing that any Turing machine with <em>S</em> states is perfectly replicated by a controller of size <em>S</em> operating on an external store. The proof has zero unresolved axioms.</p>
+<p>The key requirements for the store:</p>
+<ol>
+  <li><strong>Random-access read</strong>: the model can request data from any address</li>
+  <li><strong>Random-access write</strong>: the model can write data to any address</li>
+  <li><strong>Persistence</strong>: writes survive between steps</li>
+</ol>
+<p>A file system qualifies. A database qualifies. A code interpreter with persistent variables qualifies. Chain of thought within a fixed context window does <em>not</em> qualify&nbsp;&mdash; it lacks persistence beyond the window.</p>
+<h2>Why this matters</h2>
+<p><strong>For architecture.</strong> External tools aren't a convenience&nbsp;&mdash; they're a computational necessity. The difference between an LLM with and without an external store isn't "faster" versus "slower." It's "finite automaton" versus "Turing machine." A qualitative jump in what's computable, not a quantitative improvement in speed.</p>
+<p><strong>For scaling.</strong> Expanding the context window from 128K to 1M tokens makes the finite automaton larger, but it's still a finite automaton. It can handle bigger problems within its bound, but it cannot handle problems that exceed that bound no matter how long it runs. An 8K-token model with a well-organized external store is strictly more powerful than a 1M-token model without one.</p>
+<p><strong>For organization.</strong> Once you have the store, a second question arises: does it matter how the store is organized? The answer is yes, dramatically. We prove (in a companion result, the Library Theorem) that an indexed store yields O(log N) retrieval versus O(N) for an unstructured store&nbsp;&mdash; an exponential gap. Over <em>T</em> reasoning steps, this compounds: O(T&nbsp;log&nbsp;N) versus &Theta;(T&sup2;). The more complex the problem, the more organization matters.</p>
+<blockquote><p>Externalization is what makes you capable. Organization is what makes you efficient. And the advantage of both grows without bound.</p></blockquote>
+<h2>What this means in practice</h2>
+<p>When you give Claude access to a computer tool, or let GPT-4 write and execute code, or connect an LLM to a database&nbsp;&mdash; you are not adding a convenience feature. You are upgrading a finite automaton to a Turing machine. The model goes from "can solve any problem that fits in its window" to "can solve any computable problem, period."</p>
+<p>And when that external store is organized&nbsp;&mdash; indexed, structured, navigable&nbsp;&mdash; the model doesn't just gain capability. It gains efficiency that scales with problem complexity. A flat text file of notes helps. A well-indexed database helps quadratically more.</p>
+<p>This is, incidentally, why libraries were invented. Not as a convenience for forgetful scholars, but as a computational necessity for thinking beyond what fits in one head. The math is the same. The medium is different.</p>
+<hr>
+<p>All results are mechanically verified in Lean 4 with zero unresolved axioms. Technical details in "External Memory, Not Chain of Thought: What Makes Bounded Transformers Turing Complete" (Mainen 2026).</p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

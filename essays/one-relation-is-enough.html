@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Relation Is Enough — Topological Transmission Theory</title>
+<meta name="description" content="Every ontology uses dozens of primitive relations. We show you need exactly one: belongs-to. Everything else is a quality of that relation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul, ol { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>One Relation Is Enough</h1>
+<p class="subtitle">Every ontology uses dozens of primitive relations. You need exactly one: belongs-to. Everything else is a quality of that relation.</p>
+<p>Every ontology in common use&nbsp;&mdash; BFO, DOLCE, Schema.org, the OBO Foundry&nbsp;&mdash; starts with a collection of primitive relations. <em>Part-of</em>, <em>instance-of</em>, <em>participates-in</em>, <em>has-quality</em>, <em>depends-on</em>. BFO has 36. DOLCE has more. Each comes with its own axioms, its own edge cases, its own arguments about whether <em>part-of</em> should be transitive across categories.</p>
+<p>We show that you need exactly one: <strong>belongs-to</strong>.</p>
+<p>Everything else&nbsp;&mdash; parthood, instantiation, participation, dependence, quality attribution&nbsp;&mdash; is belongs-to with a different quality attached. The quality tells you what <em>kind</em> of belonging it is. The relation itself is always the same.</p>
+<h2>How it works</h2>
+<p>An entity is anything that can belong to something or have something belong to it. A <em>belonging</em> is a triple: an entity (the dependent), another entity (the context it belongs to), and a quality (the kind of belonging). That's it. Three things.</p>
+<p>A person belongs to a meeting (quality: <em>participant</em>). A heart belongs to a body (quality: <em>part</em>). A color belongs to a surface (quality: <em>attribute</em>). A student belongs to a class (quality: <em>instance</em>). The relation is always belongs-to. The quality disambiguates.</p>
+<p>This means BFO's <em>part-of</em> is just belongs-to with a parthood quality. DOLCE's <em>quale</em> is belongs-to with a quale quality. Every one of their primitives reduces to the same single relation plus a distinguishing quality. We demonstrate this for 12 relations across both frameworks&nbsp;&mdash; 6 from BFO, 6 from DOLCE&nbsp;&mdash; and prove in Lean 4 that all 12 reductions are valid and that all 12 qualities are distinct.</p>
+<h2>The reflexive trick</h2>
+<p>Here's where it gets interesting. Qualities are entities. If a quality is an entity, then it can belong to things. And the quality of <em>that</em> belonging is itself a quality, which is itself an entity.</p>
+<p>This sounds like infinite regress. It isn't. We prove that the reflexive closure terminates at depth 1. Qualities of qualities are just qualities. The system is self-grounding: five meta-qualities (<em>instance</em>, <em>inverse</em>, <em>implies</em>, <em>transitive</em>, <em>applies-to</em>) describe the behavior of all qualities, including themselves. They form a closed grammar.</p>
+<p>This is not a philosophical convenience. It's a formal result: the meta-quality closure is finite, complete, and mechanically verified. No infinite tower. No external metalanguage. The system describes itself.</p>
+<h2>Social structure for free</h2>
+<p>Once you have belongings, social structure emerges without being stored. Two entities that share a context are <em>co-participants</em>. This gives you a graph&nbsp;&mdash; the situation graph&nbsp;&mdash; where edges represent shared belonging. It's symmetric (if A shares a context with B, B shares one with A). It's irreflexive (you can't co-participate with yourself). And it's grounded: every edge is witnessed by two explicit belongings.</p>
+<p>The situation graph is never stored as its own data structure. It's a <em>view</em> over the belongings. This is a design principle, not a shortcut: the social structure is always derivable, always consistent with the raw data, and never stale.</p>
+<h2>Why this matters for AI</h2>
+<p>Every AI system that interacts with structured data needs an ontology, whether it admits it or not. The question is whether you inherit someone else's 36 primitives or build from one.</p>
+<p>With one primitive, interoperability becomes trivial. Two systems that both use belongs-to can merge their data without a concept-alignment step. The quality tells you what kind of relationship it is; the structure is already shared. No mapping tables, no crosswalks, no ontology alignment workshops.</p>
+<p>With reflexive grounding, the system can reason about its own structure without a separate metalanguage. A policy that says "this entity type requires approval before modification" is itself a belonging&nbsp;&mdash; a policy belongs to a domain with a governance quality. The system that enforces the policy is described by the same ontology as the data it governs.</p>
+<blockquote><p>One relation. Everything else is a quality of that relation. The simplicity is not a limitation&nbsp;&mdash; it is the point.</p></blockquote>
+<hr>
+<p>All results mechanically verified in Lean 4: 5 modules, 12 reductions, reflexive closure termination, meta-quality completeness. Zero sorry axioms. Full details in "Belongs-To and Nothing Else: A Single-Primitive Relational Ontology" (Mainen 2026).</p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>
