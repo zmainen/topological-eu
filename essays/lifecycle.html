@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entities and Belongings — Topological Transmission Theory</title>
+<meta name="description" content="Agent lifecycle: birth, operation, consolidation, death. Context window as lifespan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Entities and Belongings</h1>
+<p class="subtitle">Agent lifecycle: birth, operation, consolidation, death. Context window as lifespan.</p>
+<p>| Section | What it covers | |—-|—-| | Ontology | What an entity is, what a belonging is | | Locality | Assert direct belongings only | | Schema | Two tables, nothing else | | Sources and mappings | How external data becomes entities | | Lifecycle | Birth and death as belonging | | Queries | SQL patterns | | Build | How the index is derived |</p>
+<h2>Ontology</h2>
+<p>An <strong>entity</strong> is a thing with an identity. It has an `id`, a `type`, and a `name`. That is all it <em>is</em>. Everything you know <em>about</em> it — its affiliations, its location, its genre, its authors — is a belonging.</p>
+<p>A <strong>belonging</strong> is a directed arrow from an entity to something it belongs to, with optional temporal bounds. The direction is always: from the entity to what it belongs to. Every belonging is temporal — it has a start, and it can end. A belonging without dates is one where the dates are unknown or irrelevant, not one that is atemporal by nature.</p>
+<p>``` track      → person         (belongs to its artist) track      → Psytrance      (belongs to a genre) person     → mainenlab      (belongs to a lab) lab        → programme      (belongs to a programme) paper      → doi:10.1038/x  (belongs to its DOI) paper      → person         (belongs to its author) paper      → journal        (belongs to its journal) doi        → CrossRef       (belongs to its registrar) file       → filesystem     (belongs to its container) project    → active         (belongs to a lifecycle stage) cell       → body           (belongs to an organism) memory     → person         (belongs to a mind) branch     → parent-branch  (belongs to its parent) ```</p>
+<p>This is the only mechanism. Every relationship — hierarchy, affiliation, classification, lifecycle, provenance, authorship, location — is a belonging. There are no relation types, no role labels, no special columns. Just: this entity belongs to that target, starting when, ending when, according to whom.</p>
+<h2>Locality</h2>
+<p><strong>Assert only direct belongings. Derive everything else by traversal.</strong></p>
+<p>A track belongs to an artist. The artist belongs to a record label. Do not also tag the track with the label — that relationship is a query, not an assertion. A person belongs to mainenlab. Mainenlab belongs to the Neuroscience Programme. Do not tag the person with the programme.</p>
+<p>The builder does not propagate belongings. Queries traverse them.</p>
+<h2>Schema</h2>
+<p>Two tables in `data/entities.db`:</p>
+<p><strong>entities</strong> — things that exist.</p>
+<p>| Column | Purpose | |—-|—-| | id | `type:slug` (e.g., `person:davide-crombie`, `doi:10.1038/x`) | | type | the entity class | | name | display name |</p>
+<p><strong>belongings</strong> — every relation.</p>
+<p>| Column | Purpose | |—-|—-| | entity_id | FK to entities — the thing that belongs | | target | what it belongs to (an entity id, a name, a path) | | start_date | when the belonging began (NULL = unknown) | | end_date | when it ended (NULL = ongoing or unknown) | | source | who asserted this (the scanner, the user, the API) |</p>
+<h3>Examples</h3>
+<p>``` entity: person:davide-crombie   → mainenlab             (2020, NULL, frontmatter)   → phd-student           (2020, NULL, frontmatter)   → project:inscription   (2026, NULL, frontmatter)</p>
+<p>entity: org:mainen   → org:neuroscience       (NULL, NULL, frontmatter)</p>
+<p>entity: paper:f040022b   → doi:10.1038/nrn1933   (NULL, NULL, papers.db)   → person:Z. Mainen      (NULL, NULL, papers.db)   → journal:Nature Reviews (2006, NULL, papers.db)   → published             (2006, NULL, papers.db)   → papers.db             (NULL, NULL, scan)</p>
+<p>entity: track:abc123   → person:Some Artist    (NULL, NULL, music.db)   → Psytrance             (NULL, NULL, music.db)   → music.db              (NULL, NULL, scan) ```</p>
+<p>No `role_type` column. The target's identity tells you the nature of the relationship. A belonging to a person is authorship or artistry. A belonging to a genre name is classification. A belonging to "active" is lifecycle. The semantics are in the entities, not in labels on the arrows.</p>
+<h2>Sources and schema mappings</h2>
+<p>A <strong>source</strong> is an entity that emits other entities and belongings. `music.db` is a source. `papers.db` is a source. A directory of markdown files is a source. Discogs is a source. iNaturalist is a source. Sources are not special — they're entities like anything else, and other entities belong to them.</p>
+<p>A <strong>schema mapping</strong> is an operator (Definition 2) that transforms a source into entities and belongings. It is a method (Definition 3) — a repeatable procedure. Given a source, the mapping knows:</p>
+<ul><li>What in this source counts as an entity </li><li>What the entity's type and name are </li><li>What counts as a belonging </li><li>What the belonging's target and dates are </li></ul>
+<p>Currently, schema mappings are Python functions in `build_entities.py` (one per source). The target architecture: mappings as declarative data (YAML), applied by a generic builder. Adding a new source means writing a mapping, not writing code.</p>
+<p>```</p>
+<h1>Example: schema mapping for papers.db</h1>
+<p>source: data/papers.db format: sqlite entity:   table: papers   id: "paper:{id}"   type: paper   name: "{title}" belongings:   - column: doi     target: "doi:{value}"     ensure_target: {type: doi}   - column: authors     parse: json_array     target: "person:{value}"     ensure_target: {type: person}   - column: journal     target: "journal:{value}"     ensure_target: {type: journal}   - column: year     as: start_date     target_from: article_type     map: {posted-content: preprint, journal-article: published} ```</p>
+<p>Schema mappings are themselves entities. They belong to the source they map and to the ontology they map into. A change to a mapping is an ontological decision — it goes through the PR process like any other change.</p>
+<p><strong>No privileged source of truth.</strong> The system does not prescribe where truth lives. If two sources disagree about an entity's belongings, both assertions coexist. Conflict resolution is a policy question, resolved through the same PR mechanism as any other conflict (see `24-branch-visibility.md`).</p>
+<h2>Lifecycle</h2>
+<p>Lifecycle is a belonging with dates. An entity belongs to a lifecycle stage, and that belonging has a `start<em>date</em>` and possibly an `enddate`. Birth is the start of a belonging. Death is the end. Joining is the start. Leaving is the end.</p>
+<p>Common lifecycle stages (these are target names, not special values):</p>
+<p>| Context | Stages | |—-|—-| | Methods, foundations | draft → active → superseded | | Skills | active → deprecated | | Projects | active → paused → completed → archived | | Organizations | active → inactive → dissolved | | Branches | active → merged |</p>
+<h2>Queries</h2>
+<p>What does entity X belong to?</p>
+<p>``` SELECT target, start_date, end_date, source FROM belongings WHERE entity_id = 'person:davide-crombie' ```</p>
+<p>What belongs to entity Y?</p>
+<p>``` SELECT e.id, e.type, e.name FROM entities e JOIN belongings b ON e.id = b.entity_id WHERE b.target = 'org:mainen' ```</p>
+<p>Walk the chain upward from a person:</p>
+<p>``` — Davide → mainenlab → neuroscience → champalimaud-research — Each step: SELECT target FROM belongings WHERE entity_id = ? ```</p>
+<p>Everything that belongs to "active":</p>
+<p>``` SELECT e.type, e.name FROM entities e JOIN belongings b ON e.id = b.entity_id WHERE b.target = 'active' AND b.end_date IS NULL ```</p>
+<h2>Build</h2>
+<p>`python3 scripts/build_entities.py [—verbose]` rebuilds `data/entities.db` from scratch. The DB is disposable — delete it, scan again, same result. The builder applies schema mappings (currently hardcoded as functions) to each source.</p>
+<h2>Portability</h2>
+<p>Two tables, one relation. The entity/belonging model is independent of storage backend, source format, or domain. It indexes SQLite, frontmatter, and external APIs equally. This is what Filix inherits from HAAK.</p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

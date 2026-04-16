@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance as Situation — Topological Transmission Theory</title>
+<meta name="description" content="Governance is a situation, not an attribute. Decision processes, merge governance, authority as belonging with delegation chains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Governance as Situation</h1>
+<p class="subtitle">Governance is a situation, not an attribute. Decision processes, merge governance, authority as belonging with delegation chains.</p>
+<p>Governance is commonly treated as an attribute of persons: the governor governs, the committee decides, the maintainer merges. This document argues that governance is a situation, not an attribute. The unit of governance is the collective decision process, not the individual who signs. Authority to decide — including the authority to merge forked branches in a DAG-based ledger — flows from governance situations with defined methods, not from persons who happen to hold title.</p>
+<p>The argument proceeds in six definitions (G1–G6), each building on the ontological apparatus of [[01-objects]] (situations, methods, domains, materials), [[02-relations]] (belongs-to, quality, meta-qualities), and [[12-situation-nesting]] (situation scale, nesting, policy inheritance). The result connects to three intellectual commitments already in the system: <a href="institutional-intelligence">Foundation 03</a>'s claim that institutions are governance structures, not monolithic actors; the constitutional ledger specification ([[33-constitutional-ledger]]); and Paper 4a's treatment of productive inconsistency, where forks are disagreement made structural and merges are governance applied to disagreement.</p>
+<p>Four running examples: <em>(a) a US-China trade agreement — sovereign entities with incompatible constitutions finding terms</em>, <em>(b) a citizens' assembly deciding local policy</em>, <em>(c) an agent merge in the Filix ledger — three standing roles propose resolution, human signs</em>, <em>(d) open-source project governance — maintainers, contributors, RFC process</em>.</p>
+<hr>
+<h2>The Claim</h2>
+<p>Definition 11 of [[01-objects]] defines a situation as "a particular, ongoing coming-together of actors, methods, and domains around materials." Governance fits this definition exactly. A collective decision is a coming-together of parties (actors) applying a decision process (method) within a scope of authority (domain) to matters under deliberation (materials). The parties do not govern because they are governors. They govern because they participate in a governance situation with defined structure.</p>
+<p>This is not a metaphor. It is a structural identification. Every governance act — a vote, a consensus round, a merge approval, a treaty ratification — is a situation in the ontological sense: it has temporal bounds, participants, methods, materials, and a domain. The identification enables the ontology to treat governance with the same apparatus that handles examinations, diagnoses, trials, and meals. No new primitives are required.</p>
+<p>What the identification provides is a way to reason about authority without essentializing it. If governance is a property of persons, then authority questions reduce to "who is in charge?" — a question about identity. If governance is a situation, then authority questions reduce to "what process was followed, by whom, over what scope?" — questions about structure. The second framing is auditable. The first is not.</p>
+<hr>
+<h2>G1: Governance Situation</h2>
+<p><strong>Definition G1 (<em>Governance situation</em>).</strong> A <em>governance situation</em> is a situation (Definition 11 of [[01-objects]]) whose method is a collective decision process. The actors are the parties with standing — those entitled to participate in the process. The materials are the matters under deliberation. The domain is the scope over which the decision has force. The quality "governs" on a belonging marks that belonging as carrying governance authority.</p>
+<p>The parts are familiar. What is new is the combination: a situation whose purpose is not to transform materials directly (as in cooking) or to generate knowledge (as in diagnosis) but to bind the participants to a collective decision about what happens next within the domain.</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade negotiation is a governance situation. The actors are the negotiating delegations (with standing granted by their respective sovereigns). The method is structured negotiation with ratification requirements. The materials are the terms under discussion: tariff schedules, investment rules, dispute resolution procedures. The domain is the bilateral economic relationship — the scope over which the agreed terms will have force. Neither delegation governs alone. The governance is the negotiation. </li><li><em>(b)</em> The citizens' assembly is a governance situation. The actors are the randomly selected citizens (standing granted by sortition). The method is facilitated deliberation followed by supermajority vote. The materials are the policy proposals, expert briefings, and public testimony. The domain is the municipality. The assembly governs not because the citizens are governors by nature, but because the assembly situation has a defined method, legitimate standing, and bounded scope. </li><li><em>(c)</em> The agent merge is a governance situation. The actors are the three standing roles (librarian, architect, steward) that proposed the resolution and the human who signs. The method is proposal-plus-attestation: agents propose, human attests. The materials are the forked branches and the proposed resolution. The domain is the ledger scope covered by those branches. The human does not merge by virtue of being human. The human merges because the governance process requires human attestation as its final step. </li><li><em>(d)</em> The open-source RFC process is a governance situation. The actors are the maintainers and any contributor who comments. The method is public proposal, discussion period, and maintainer decision (with varying thresholds depending on the project). The materials are the RFC document and the codebase it would modify. The domain is the project's API surface or architectural scope. </li></ul>
+<hr>
+<h2>G2: Decision Process as Method-Type</h2>
+<p><strong>Definition G2 (<em>Decision process</em>).</strong> The method of a governance situation is a <em>method-type entity</em> (Definition 3 of [[01-objects]]) in the governance family. Specific decision processes — vote, consensus, sortition, delegation, arbitration — are instances of the governance method-type (meta-quality R5.1 from [[02-relations]]).</p>
+<p>Each decision process carries qualities that define its operation:</p>
+<p>| Quality | What it specifies | |—-|—-| | <strong>threshold</strong> | What count or proportion suffices for a decision to pass. Simple majority, supermajority, unanimity. | | <strong>quorum</strong> | Minimum participation required for the process to be valid. A vote with two of fifty members present is not a vote. | | <strong>delegation-depth</strong> | How many layers of delegation are permitted. Zero means direct participation only. One means a delegate may act on another's behalf. Higher values enable representative chains. | | <strong>veto</strong> | Whether any single party can block a decision. Veto is a structural quality of the process, not a personal power — it applies to anyone who holds the veto-bearing role within this governance situation. | | <strong>transparency</strong> | Whether deliberation is public or private, and whether votes are attributable or anonymous. |</p>
+<p>These qualities are entities in the quality graph (R3 of [[02-relations]]). "Threshold" is not a label — it is an entity that belongs to the governance method-type family with quality "parameter." This means the qualities of governance processes are subject to the same ontological treatment as everything else: they can be inspected, classified, compared, and related to each other.</p>
+<p>The consequence is that governance processes are composable and comparable. Two assemblies using different threshold values are instances of the same method-type with different quality values. A sortition that selects delegates who then vote by supermajority is a composition of two method-types. The composition is not ad hoc — it is a sequence of governance situations, each with its own method, nested within a parent governance situation (see G6).</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade agreement's method is negotiation-with-ratification. Threshold: both parties must ratify. Quorum: the delegations must be authorized representatives. Delegation-depth: high (the negotiator delegates from the head of state, who delegates from the electorate). Veto: effectively yes — either party can refuse terms. </li><li><em>(b)</em> The citizens' assembly's method is facilitated-deliberation-with-supermajority-vote. Threshold: two-thirds. Quorum: 80% of selected citizens. Delegation-depth: zero (participants must attend in person). Veto: none. </li><li><em>(c)</em> The agent merge's method is proposal-plus-attestation. Threshold: all three standing roles must propose, and the human must attest. Quorum: all four parties. Delegation-depth: zero for the human (attestation is non-delegable); one for agents (an agent role can be delegated to a replacement agent by the human). Veto: the human, implicitly — refusal to attest blocks the merge. </li></ul>
+<hr>
+<h2>G3: Merge as Governance</h2>
+<p><strong>Definition G3 (<em>Merge as governance situation</em>).</strong> A merge of forked branches in a DAG is a governance situation. The forked branches are the materials. The parties who created the fork — and any parties with standing over the affected scope — are the actors. The merge entry records: who participated, what process was used, what terms were agreed. The merge is valid if and only if the governance proof (G4) demonstrates that the defined process was followed.</p>
+<p>This definition makes forks and merges ontologically precise. A fork is disagreement made structural: two or more parties produce incompatible extensions of a shared state. The incompatibility is not a system failure. It is productive inconsistency — the term from Paper 4a. Different agents may have different information, different goals, or different interpretations of policy. The fork records all of these without forcing premature resolution.</p>
+<p>A merge is governance applied to disagreement. The merge does not erase the fork. It records the resolution: which terms were adopted, which were rejected, which were modified, and by what process. The merge entry in the DAG carries this record permanently. Anyone who traverses the ledger can see the fork, the merge, and the governance process that connected them.</p>
+<p>The critical property is that the merge entry is not a unilateral act. It is the outcome of a governance situation with defined actors, a defined method, and a defined scope. A merge signed by one person who ignores the governance process is structurally identical to an invalid vote — it has the form of a decision without the substance. The ledger can reject it: the governance proof is absent or insufficient.</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade agreement is a merge. Two sovereign entities have maintained separate economic policies (forked branches on the global economic DAG, metaphorically). The agreement merges specific domains: these tariff rates, these investment protections, this dispute resolution mechanism. The materials are the prior policy states and the proposed terms. The merge is valid because both parties ratified — the governance proof is the ratification record. </li><li><em>(c)</em> In the Filix ledger, three standing roles (librarian, architect, steward) each extend the ledger with independent proposals during a period of concurrent work. Their branches fork from a common ancestor. To merge, the three propose a resolution (which changes from each branch to accept, modify, or reject) and the human attests. The merge entry records the three proposals, the resolution, and the human's attestation signature. The merge is valid because the proof field carries evidence that the defined process was followed. </li><li><em>(d)</em> In open-source governance, a feature branch is a fork. The pull request review is a governance situation. The merge is valid when the defined process (maintainer approval, CI passing, no blocking reviews) is satisfied. A maintainer who merges without review in a project that requires review has produced a structurally invalid merge — the governance proof is absent. </li></ul>
+<hr>
+<h2>G4: Governance Proof</h2>
+<p><strong>Definition G4 (<em>Governance proof</em>).</strong> The <em>proof field</em> on a merge entry carries evidence that the governance process defined in the method was followed. The proof does not attest to the wisdom of the decision. It attests to its procedural legitimacy: the right parties participated, the right process was used, the required thresholds were met.</p>
+<p>Two implementation levels:</p>
+<p><strong>v1.0: Attestation.</strong> The proof is a set of signatures from quorum members. Each signature asserts: "I participated in this governance process and the recorded outcome reflects the process as it occurred." The signatures are verifiable. The signers are identifiable. The proof is transparent — anyone can check who signed and whether quorum was met.</p>
+<p><strong>v2.0: Zero-knowledge proof.</strong> The proof demonstrates that quorum was reached and the threshold was met <em>without revealing individual votes</em>. The privacy of deliberation and the verifiability of outcome coexist. A ZK governance proof says: "a sufficient number of authorized parties approved this merge, and here is a cryptographic proof of that fact, but you cannot determine which parties voted which way."</p>
+<p>The progression from v1.0 to v2.0 is not a replacement. It is an expansion of capability. Some governance situations require transparency (public assembly votes should be attributable). Others require privacy (personnel decisions, anonymous ballot). The transparency quality on the governance method (G2) determines which proof type is appropriate.</p>
+<p>The governance proof is itself an entity in the ontology. It belongs to the merge entry with quality "evidence" (from the provenance family, R6 of [[02-relations]]). It belongs to the governance situation with quality "materialization" (S4 of [[12-situation-nesting]]). The proof is the material trace of the governance process — the thing you can point to when someone asks "by what authority was this decided?"</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade agreement's governance proof is the ratification record: signed instruments from both governments, deposited with a designated custodian. The proof is transparent — anyone can verify that both parties ratified. </li><li><em>(b)</em> The citizens' assembly's governance proof depends on the transparency quality. If the vote is public: a signed tally with attributable votes. If the vote is by secret ballot: an auditable count with ZK proof that the ballots were cast by assembly members and the tally is correct. </li><li><em>(c)</em> The agent merge's governance proof is a set of four attestation signatures: three from standing roles, one from the human. v2.0 could add ZK proof that the three agents reached consensus without revealing the internal deliberation (useful when agent deliberation involves sensitive data). </li></ul>
+<hr>
+<h2>G5: Authority as Belonging</h2>
+<p><strong>Definition G5 (<em>Authority as belonging</em>).</strong> Authority is not an intrinsic property of persons. It is a belonging: entity A belongs-to governance-scope B with quality "authorized-by" and a source that traces to the governance process that granted the authority. Delegation is a chain of such belongings. Agent authority is always traceable to a human-authorized delegation entry.</p>
+<p>This is the central structural consequence of treating governance as situation. If governance is an attribute, authority is a property of the governor — it inheres in the person. If governance is a situation, authority is a belonging — it relates a person to a scope via a governance process. The belonging can be inspected: who authorized this person? Through what process? Over what scope? When did the authority begin and when does it expire?</p>
+<p>The belongs-to relation carries all of this:</p>
+<p>``` person:zach  belongs-to  scope:haak-ledger  quality: "authorized-by"     source: "governance:constitutional-founding-2026-02"     start_date: "2026-02-24"     end_date: NULL ```</p>
+<p>Zach has authority over the HAAK ledger. The authority is not inherent — it traces to the constitutional founding (a governance situation). The scope is bounded (the HAAK ledger, not all possible ledgers). The authority has temporal bounds (started at founding, no end date — meaning it persists until a governance process terminates it).</p>
+<p>Delegation extends the chain:</p>
+<p>``` agent:claude-opus  belongs-to  scope:haak-ledger  quality: "authorized-by"     source: "governance:delegation-from-zach-2026-03-16"</p>
+<p>governance:delegation-from-zach-2026-03-16     actor: person:zach     method: explicit-delegation     domain: scope:haak-ledger     material: "agent:claude-opus authorized for project-scope operations" ```</p>
+<p>The agent's authority traces through one delegation step to Zach, whose authority traces to the founding. The chain is finite, auditable, and revocable. Any link can be severed by a governance process with appropriate scope.</p>
+<p><strong>The traceability requirement is absolute for agents.</strong> An agent cannot acquire authority except through delegation from a human whose own authority traces to a governance process. This is not a safety constraint bolted onto the system — it is a structural consequence of the ontology. Authority is a belonging with a source. The source is a governance situation. Governance situations require parties with standing. Standing traces upward through delegation chains. The chain must terminate in a governance process with human participants. There is no path by which an agent acquires authority ex nihilo.</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade negotiator's authority to bind their country is a belonging: negotiator belongs-to scope:bilateral-trade with quality "authorized-by," source: "governance:executive-delegation." That delegation traces to the executive, whose authority traces to the electoral process. The chain is long but finite. </li><li><em>(b)</em> The citizens' authority to decide comes from sortition — a governance situation that grants standing. Citizen belongs-to scope:municipal-policy with quality "authorized-by," source: "governance:sortition-2026-01." The authority expires when the assembly's term ends. </li><li><em>(c)</em> The standing roles' authority to propose merges is a belonging with source tracing to the constitutional founding of the Filix ledger. The human's authority to attest traces to the same source. An agent spawned mid-session inherits no authority unless the spawning governance process (the delegation entry) explicitly grants it. </li><li><em>(d)</em> The maintainer's merge authority is a belonging: maintainer belongs-to scope:project-repo with quality "authorized-by," source: "governance:maintainer-election" or "governance:founder-delegation." A new maintainer is added by a governance process (vote, appointment, or inheritance). Their authority is traceable. </li></ul>
+<hr>
+<h2>G6: Nested Governance</h2>
+<p><strong>Definition G6 (<em>Nested governance</em>).</strong> Governance situations nest (per S1–S5 of [[12-situation-nesting]]). A standing committee governs routine decisions. Constitutional amendments require a broader assembly. The nesting is itself governed: the rules for who can create sub-governance situations are constitutional rules in the ledger.</p>
+<p>Three levels of nesting are characteristic:</p>
+<p><strong>Constitutional level.</strong> The foundational governance situation that establishes the decision rules, authority structure, and scope. It is maximally inclusive (all parties with any standing participate) and maximally rare (invoked only when the rules themselves must change). The constitution is a policy (Definition 12 of [[01-objects]]) — a normative type-compound with maximal scope. The constitutional-level governance situation is the process by which that policy is adopted or amended.</p>
+<p><strong>Institutional level.</strong> Standing governance situations that operate under the constitution: committees, councils, maintainer groups. These are project-scale situations (S1 of [[12-situation-nesting]]) with persistent participants, accumulated procedure, and bounded scope. They handle routine decisions within their domain without escalating to the constitutional level.</p>
+<p><strong>Operational level.</strong> Episode-scale governance situations: a single vote, a single merge approval, a single RFC decision. These are the atomic governance acts. They inherit the method and authority from their institutional parent. A maintainer's merge approval is an operational governance situation nested within the maintainer group (institutional), which operates under the project's governance charter (constitutional).</p>
+<p>The nesting creates a resolution path for disputes. When an operational decision is contested, it escalates to the institutional level. When an institutional process is contested, it escalates to the constitutional level. The constitutional level is the court of last resort. This is policy inheritance (S5) applied to governance: inner situations specialize the outer situation's rules, but cannot override non-overridable constitutional constraints.</p>
+<p><strong>The nesting is governed by the level above.</strong> A committee cannot create sub-committees with broader scope than its own. A project-level governance charter cannot override the constitutional prohibition on unilateral merges. The rules for creating and dissolving governance situations are themselves governance rules, residing at a higher nesting level than the situations they govern. This reflexivity is not a paradox — it is a fixed point. The constitution governs the creation of institutions; the institutions govern the creation of operational processes; the operational processes execute within the bounds defined above them. The hierarchy is grounded in the constitutional founding, which is the terminal governance situation: it has no parent, and its authority derives from the agreement of the founding parties.</p>
+<p><em>Running examples:</em></p>
+<ul><li><em>(a)</em> The trade agreement creates nested governance. The treaty text (constitutional level) establishes a dispute resolution body (institutional level). The body adjudicates specific cases (operational level). The treaty specifies how the body is composed, what its scope covers, and how its decisions can be appealed. The nesting is explicit: treaty → body → case. </li><li><em>(b)</em> The citizens' assembly is nested within the municipal governance framework (constitutional level: the city charter; institutional level: the assembly process as defined by ordinance; operational level: each deliberation session and vote). </li><li><em>(c)</em> The Filix ledger nests governance three deep. The constitution ([[33-constitutional-ledger]]) is the constitutional level. Standing roles (librarian, architect, steward) form the institutional level — they have persistent standing and defined scope. Each merge approval is the operational level. The constitution specifies which roles exist, what their scopes are, and what methods they use. A standing role cannot create a sub-governance situation that exceeds its scope. The human's attestation at the merge level (operational) derives authority from the constitutional founding. </li><li><em>(d)</em> Open-source governance nests similarly. The governance charter or GOVERNANCE.md is constitutional. The maintainer group is institutional. Each PR review is operational. Some projects add intermediate nesting: working groups (institutional, subordinate to the full maintainer body) that govern specific subsystems. </li></ul>
+<hr>
+<h2>Connections</h2>
+<p><strong><a href="institutional-intelligence">Foundation 03</a> (Institutional Intelligence).</strong> The argument there is that alignment is governance, not calibration — you do not align an agent by tuning its weights but by structuring the situations within which it operates. This document formalizes the second half of that claim. Governance situations are the structural mechanism. They are not metaphors for institutional design; they are the ontological objects that institutions consist of. An institution, in the sense of <a href="institutional-intelligence">Foundation 03</a>, is a persistent governance situation (program-scale, per S1) with nested sub-governance at institutional and operational levels. The institution does not "have" governance as an attribute. The institution <em>is</em> governance — a sustained situation of collective decision-making with accumulated procedure and scope.</p>
+<p><strong>Paper 4a (Productive Inconsistency).</strong> Forks are the structural expression of disagreement. Different agents extend a shared state in incompatible directions because they have different information, different goals, or different interpretations. The fork preserves all of this without forcing premature resolution. The merge is where governance enters: the resolution of productive inconsistency through a defined collective process. G3 formalizes this connection. The merge is not a technical operation (git merge); it is a governance operation — a situation with actors, methods, and proof. The technical merge is the materialization of the governance decision.</p>
+<p><strong>The Constitutional Ledger ([[33-constitutional-ledger]]).</strong> The proof field, the merge mechanism, authority as belonging — all are specified architecturally in the ledger spec. This document provides the ontological grounding. The ledger's proof field is G4. The ledger's merge entry is G3. The ledger's authority model is G5. The constitutional scope rules are G6. The ontology does not prescribe the implementation. It specifies what the implementation must represent: governance situations with defined methods, traceable authority, and auditable proof.</p>
+<p><strong><a href="ontology-relations">Ontology 02</a> (Relations).</strong> The quality "governs" enters the quality graph as an instance of the participation family. It applies-to (R5.5) governance-scope entities. "Authorized-by" is a provenance quality — it records the source of authority. The governance-method qualities (threshold, quorum, delegation-depth, veto, transparency) are instances of the "parameter" quality, applicable to method-type entities in the governance family. All governance concepts are entities and qualities in the existing framework. No extensions to the relational apparatus are required.</p>
+<p><strong><a href="ontology-situation-nesting">Ontology 12</a> (Situation Nesting).</strong> Governance situations nest. G6 is a direct application of S1–S5 to governance. The one addition is that governance nesting is self-referential: the rules for creating governance situations are themselves governance rules at a higher nesting level. This reflexivity is the governance analogue of the quality graph's reflexive closure (R3) — the system that describes governance also governs its own description.</p>
+<hr>
+<h2>Scope and Continuation</h2>
+<p>This document formalizes governance as situation: G1–G6 cover the governance situation, its method, merges, proofs, authority as belonging, and nesting. It does not address:</p>
+<ul><li><strong>Governance failure</strong> — what happens when a governance process breaks down (quorum not met, process subverted, authority contested). These are empirical questions about specific governance situations, not ontological questions about governance in general. The ontology provides the framework for diagnosing failure (which quality was violated?), not the remedies. </li><li><strong>Governance design</strong> — which decision processes are better for which situations. The ontology is agnostic about process design. It formalizes what governance <em>is</em>, not which governance is <em>good</em>. </li><li><strong>Consent and standing</strong> — the deeper question of what legitimates standing in the first place. G1 takes standing as given (the parties "entitled to participate"). The source of that entitlement — consent, election, inheritance, appointment — is a governance question one level up (G6), which eventually bottoms out in a founding agreement. The founding agreement's legitimacy is a political question, not an ontological one. The ontology can represent it. It cannot justify it. </li><li><strong>Inter-constitutional governance (bridges)</strong> — the hardest case. Two systems with different founding acts, different constitutions, different governance structures want to transact. Neither recognizes the other's authority. The merge between them cannot appeal to either constitution — it must create a <em>bridge situation</em>: a new governance context that belongs to both ledgers, with its own method negotiated at formation, governing only the matters under negotiation. Bridge situations are Paper 4a's islands-and-bridges made governance-explicit. A bridge node must satisfy both islands' constitutions within the bridge scope, without either island submitting to the other's sovereignty. Trade treaties, the WTO, federated open-source foundations, and cross-instance Filix coordination are all instances. The bridge model requires a G7 definition and connects to Paper 5a (federation). Deferred to the next revision. </li></ul>
+<hr>
+<p><em>ontology · 13 · governance as situation · 2026-03-16 · zach + claude</em></p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

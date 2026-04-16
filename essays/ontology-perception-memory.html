@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perception and Memory — Topological Transmission Theory</title>
+<meta name="description" content="Extensions P1–P7: internal material, percept, perceptual method, representation, memory. Grounded in the apple scenario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Perception and Memory</h1>
+<p class="subtitle">Extensions P1–P7: internal material, percept, perceptual method, representation, memory. Grounded in the apple scenario.</p>
+<p>This document extends [[01<em>objects]] to cover two phenomena the correspondence exercise identified as requiring new concepts: </em>perception<em> — a method that produces an internal material from an external one — and </em>memory<em> — the persistence of that material after the external object is gone. The treatment is provisional; these definitions belong to [[01</em>objects]] or its successor once settled.</p>
+<p>A single scenario is the primary running example throughout: <em>(a) a person who walks into a room, picks up a red apple, eats it, leaves, and later remembers it.</em> Three analogues carry each definition further: <em>(b) a doctor who hears a patient describe chest pain</em>, <em>(c) a detective who examines marks on a doorframe</em>, <em>(d) a reader who encounters a line of verse and recalls it the next morning.</em></p>
+<p>| Section | What it covers | |—-|—-| | <a href="#extensions">Extensions</a> | Seven new definitions in dependency order | | <a href="#the-scenario">The scenario</a> | Seven acts mapped to the definitions | | <a href="#what-the-scenario-reveals">What the scenario reveals</a> | Structural implications for [[01_objects]] |</p>
+<hr>
+<h2>Extensions</h2>
+<p><strong>Definition P1 (<em>Internal material</em>).</strong> An <em>internal material</em> is a material-token that resides within an actor's domain rather than in an external domain. That actors have domain-property — they carry resources and constitute a territory — was established in [[04<em>correspondence</em>v1-2]]. An internal material is one of those resources: a material produced by and held within the actor's domain-space rather than existing independently in the external world.</p>
+<p><em>What an internal material is not.</em> An internal material is not part of the actor's actor-property — it does not process. It is not a capability. It is a material that happens to be located inside the actor-as-domain rather than outside it. The actor's knowledge, memories, beliefs, and expectations are all internal materials in this sense: objects that can be processed (recalled, modified, forgotten, combined) by the actor's cognitive methods, but which are themselves operands, not operators.</p>
+<p><em>Examples.</em> The apple scenario: the person's perceptual image of the apple's redness, held in mind after seeing it. The doctor: the mental representation of the patient's verbal description of chest pain, held while conducting the physical examination. The detective: the registered impression of the doorframe marks, held while searching for further evidence. The reader: the lingering rhythm of the verse line, carried into sleep.</p>
+<hr>
+<p><strong>Definition P2 (<em>Qualitative property</em>).</strong> A <em>qualitative property</em> is a relational property of a material — one that specifies what perceptual responses the material affords relative to actors with the relevant perceptual apparatus in the relevant domain conditions. Redness, sweetness, roughness, weight, warmth: each is a qualitative property. No qualitative property is intrinsic to the material; each holds relative to a perceiver and an environment.</p>
+<p><em>Qualitative properties are affordances of a particular kind.</em> Definition 5 of [[01_objects]] establishes that affordances depend on both the material's properties and the actor's capabilities. A qualitative property is an affordance for perceptual methods specifically — it specifies what a `see`, `hear`, `feel`, or `taste` method can extract from the material. The apple's redness affords a specific visual response. The chest pain affords a specific auditory response (the patient's report) and later a tactile one (palpation). The doorframe's marks afford visual extraction of depth, angle, and distribution. The verse line affords auditory and rhythmic extraction.</p>
+<p><em>What determines whether a qualitative property is actualised.</em> Actualisation requires three things: (1) the material must possess the relevant property in the relevant state — a green apple does not actualise redness; (2) the actor must have the relevant perceptual apparatus — a person blind from birth does not actualise visual redness; (3) the domain must provide the relevant conditions — an apple in total darkness does not actualise its colour for a sighted perceiver. All three conditions are relational; the ontology of qualitative properties is fully relational.</p>
+<blockquote><p>⚡ <strong>Tension P.A (<em>qualitative properties and the three axis-properties</em>).</strong> The three axis-properties of [[04<em>correspondence</em>v1-2]] — actor-power, domain-scope, material-malleability — do not include qualitative properties. Material-malleability governs what transformative operations a material affords; redness governs what perceptual operations it affords. These are distinct dimensions of the material's relational property bundle. Whether qualitative properties are a fourth axis-property, a subspecies of material-malleability, or a distinct category altogether remains unresolved. <em>Tentative position:</em> qualitative properties are relational affordances of the material, parallel to but distinct from material-malleability. Unresolved.</p></blockquote>
+<hr>
+<p><strong>Definition P3 (<em>Percept</em>).</strong> A <em>percept</em> is an internal material produced by a perceptual method. It is a material-token that represents a qualitative property of an external material — or a feature of an external situation — and resides within the actor's domain after its production.</p>
+<p>A percept is not the external material. The percept of the red apple is not the apple; it is a new object, produced from the apple, that carries information about the apple's redness. A percept of chest pain is not the pain; it is the doctor's internal representation of what the patient reported. A percept of the doorframe marks is not the marks; it is the detective's internal image of their shape and distribution. A percept of the verse line is not the text; it is the reader's internal encoding of its sound and rhythm.</p>
+<p><em>Percept identity.</em> A percept is created at the moment of perception and is a distinct material-token from the external material that caused it. Multiple percepts of the same external material are distinct material-tokens — each viewing of the apple produces a new percept, even if the apple has not changed. This is not a defect; it reflects the fact that perception is an act of production, not copying.</p>
+<hr>
+<p><strong>Definition P4 (<em>Perceptual method</em>).</strong> A <em>perceptual method</em> is a method-type that takes an external material as input and produces a percept as output within the actor's domain. It is distinctive among methods in two respects: it does not transform the external material (the apple remains the apple after being seen), and its output is an internal material rather than an external one.</p>
+<p><em>What distinguishes perceptual from transformative methods.</em> A transformative method — `eat`, `write`, `cut` — changes the state of its external material input. A perceptual method leaves the external material in its existing state and generates a new internal material. The apple is not changed by being seen. The doorframe marks are not changed by being observed. The patient's pain is not changed by being heard. In each case, the method reads a qualitative property and deposits a percept.</p>
+<p><em>The perceptual method is not purely passive.</em> Although the external material is not transformed, the perceptual method is a genuine exercise of actor-power — it requires the actor's capabilities, attention, and domain-positioning. A doctor who does not listen carefully may miss the patient's report of pain. A detective who does not examine the doorframe carefully will not register the marks. The percept's quality and completeness depend on the actor's method-execution.</p>
+<p><em>Internal structure.</em> Perceptual methods refine in the same way as other methods: `see` refines into `fixate`, `scan`, `attend`. They compose: a diagnostic examination composes `hear` (verbal history) + `feel` (palpation) + `see` (observation) into a unified diagnostic percept.</p>
+<hr>
+<p><strong>Definition P5 (<em>Material-token termination</em>).</strong> A <em>termination</em> is the end of a material-token's existence as a distinct object. Termination is distinguished from transformation. Definition 5 of [[01_objects]] establishes that material identity persists across transformation — the apple cooked is the same material-token in a different state. Termination is the limit at which this no longer holds: the point at which the material-token has no remaining state as a distinct object.</p>
+<p><em>What termination is not.</em> Termination is not transformation. Cutting an apple in half is transformation — there are now two material-tokens where there was one, but both are recognisably apple. Digesting an apple is termination — there is no remaining material-token identifiable as the apple. Termination is not disappearance from view. An apple placed behind a curtain has not terminated; it remains a material-token whose accessibility to the actor is reduced but whose existence is unaffected.</p>
+<p><em>Consequence.</em> Termination decouples material-token existence from percept existence. After the apple terminates, the percept of the apple does not terminate with it. This decoupling is what makes memory possible.</p>
+<hr>
+<p><strong>Definition P6 (<em>Representation</em>).</strong> A <em>representation</em> is a relation between an internal material and the external material, qualitative property, or situation it was produced to stand in for. Three conditions jointly constitute the representation relation: (1) <em>causal origin</em> — the representing material was produced from the represented object or situation via a method; (2) <em>structural correspondence</em> — the representing material preserves some features of the represented object, so that something can be inferred from the representation about what it represents; (3) <em>independent persistence</em> — the representing material can exist after the represented object is terminated, inaccessible, or absent.</p>
+<p><em>What representation is not.</em> Representation is not identity. The percept of the red apple represents the apple but is not the apple. Representation is not copying. A photograph represents a scene but loses many qualitative properties — depth, temperature, smell. A memory represents an experience but typically compresses, selects, and sometimes distorts it. The structural correspondence condition requires only that some features are preserved, not all.</p>
+<p><em>Representation is asymmetric and temporally extended.</em> The representing material was produced from the represented, not vice versa. And because of independent persistence, a representation can survive the termination of what it represents. This asymmetry and independence are what give representation its distinctive character.</p>
+<blockquote><p>⚡ <strong>Tension P.B (<em>structural correspondence requires a theory of features</em>).</strong> Condition (2) requires that the representing material "preserves some features" of the represented object. What is a feature, and what does preservation mean? The ontology has not yet defined features of materials beyond qualitative properties. A complete account of structural correspondence requires a theory of what features materials have and how they can be encoded in other materials. <em>Deferred to [[02_relations]].</em></p></blockquote>
+<hr>
+<p><strong>Definition P7 (<em>Memory</em>).</strong> A <em>memory</em> is an internal material that represents a past situation — or the materials and qualitative properties encountered in that situation — and persists within the actor's domain after the actor has left the domain in which the originating situation occurred. Memory is a species of representation (Definition P6): causally produced by a past perceptual method, structurally corresponding to what it represents, independently persistent.</p>
+<p><em>What distinguishes memory from a momentary percept.</em> A percept held in working attention during an encounter is not yet a memory. A percept becomes a memory when it survives the actor's departure from the originating domain — when it persists across a domain-change.</p>
+<p><em>Memory identity and change.</em> A memory is a material-token with a lifecycle: created by the originating perceptual act, transformable by subsequent processing (consolidation, reinterpretation, distortion), and terminable (forgetting). False memory is a case where the structural correspondence condition has degraded — the memory no longer accurately represents what it originally encoded, but it retains causal ancestry from the original perception.</p>
+<p><em>Temporal reference.</em> Every memory represents a past time. It was produced at T' and exists at T > T'. The memory carries the represented time as part of its content. This <em>temporal reference</em> — pointing to a past time — is an aspect of representation not fully captured by Definition P6.</p>
+<blockquote><p>⚡ <strong>Tension P.C (<em>temporal reference is unnamed</em>).</strong> The ontology gives every object temporal properties: creation, duration, expiration. What it does not say is that a material-token can <em>refer to</em> a past time while existing in the present. A memory exists at T and represents a state of affairs at T' < T. The representing/existing time distinction is unnamed. <em>Deferred to [[02_relations]].</em></p></blockquote>
+<hr>
+<h2>The Scenario</h2>
+<p><strong>Act 1 (<em>enters the room</em>).</strong> Actor-token changes domain-position; room-domain carries the apple as a resource. <em>Clean.</em></p>
+<p><strong>Act 2 (<em>picks up the apple</em>).</strong> Method: `grasp`. Actor brings the apple into immediate relational field; apple's material-malleability is high for this actor and method. <em>Clean.</em></p>
+<p><strong>Act 3 (<em>sees that the apple is red</em>).</strong> Method: `see` — a [[perceptual method]] (P4). Input: the apple. Output: a [[percept]] (P3) — a new internal material deposited within the actor's domain representing the apple's [[qualitative property]] of redness. The external material is not transformed. <em>Mapped to P3, P4.</em></p>
+<p><strong>Act 4 (<em>eats the apple</em>).</strong> Method: `eat` — transformative to the point of [[material-token termination]] (P5). The apple ceases to exist as a distinct object. The percept produced in Act 3 is unaffected — it continues as an internal material within the actor's domain, having been produced before termination. <em>Mapped to P5. Demonstrates decoupling of percept from external material.</em></p>
+<p><strong>Act 5 (<em>puts it down</em>).</strong> If termination has occurred, the act is empty or refers to residual matter. <em>Borderline; depends on degree of termination.</em></p>
+<p><strong>Act 6 (<em>leaves the room</em>).</strong> Actor changes domain-position; the percept persists as an internal resource. This is the moment that converts percept into [[memory]] (P7): it now survives the actor's departure from the originating domain. <em>Mapped to P7.</em></p>
+<p><strong>Act 7 (<em>remembers a red apple</em>).</strong> The actor accesses the memory — an internal material-token produced by the `see` act, representing the apple's redness (causal origin), preserving its colour and form (structural correspondence), persisting after termination and domain-change (independent persistence). The [[representation]] relation (P6) holds. <em>Mapped to P6, P7.</em></p>
+<hr>
+<h2>What the Scenario Reveals</h2>
+<p><em>Implication 1: The actor/domain bundling is the normal condition of cognitive actors.</em> The relational revision introduced actor/domain bundling to account for institutions. The apple scenario shows it is equally necessary for any perceiver. Every perceptual act deposits a new internal material within the actor's domain. An actor that perceives and remembers is, necessarily, a domain that accumulates materials over time.</p>
+<p><em>Implication 2: Representation is the missing foundational relation.</em> The ontology as stated in [[01<em>objects]] describes what actors do to external materials — they transform them. Perception requires a different structure: a method that produces a new internal material that stands in for an external one. This relation is not derivable from the existing definitions. It is not transformation, composition, or instantiation. Representation is a new primitive relation. It must be the first relation defined in [[02</em>relations]]: without it, the ontology can describe what actors do to the world but not what actors know about it — and action is never fully separable from knowledge.</p>
+<hr>
+<p><em>ontology · perception and memory · 2026-02-25 · zach + claude</em></p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

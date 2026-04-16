@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 — Context Transport — Topological Transmission Theory</title>
+<meta name="description" content="How agents switch situations without losing state. Checkpoint, trace, engage — not a stack, a transport layer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>20 — Context Transport</h1>
+<p class="subtitle">How agents switch situations without losing state. Checkpoint, trace, engage — not a stack, a transport layer.</p>
+<p>How agents switch between situations without losing state. Not a stack — a transport layer over the three externalizations defined in <a href="/memos/coordination-topology/">coordination-topology</a>"><a href="coordination-topology">Foundation 07</a>.</p>
+<h2>Problem</h2>
+<p>A single session routinely traverses multiple contexts: you start on task A, discover it requires B, B raises question C. Each transition risks losing state. Current mitigations — spawning new sessions, posting to boards, holding everything in the context window — are either expensive (multi-agent overhead) or fragile (context window compression erases working state).</p>
+<h2>Insight: the state is already there</h2>
+<p>The initial design proposed a separate "stack" structure with frames, cursors, push/pop operations. That over-engineers a new format for state that existing structures already carry:</p>
+<p>| Existing structure | What it holds | Axis | |—-|—-|—-| | <strong>Board</strong> (`board.md`) | What's happening here, messages between agents | Domain | | <strong>Index</strong> (`index.md`) | What exists here, navigational structure | Domain | | <strong>Tasks</strong> | Active work items with status | Method | | <strong>Engagement state</strong> (TBD) | Where are we in the procedure | Method | | <strong>Trace</strong> (TBD) | Where the agent has been, why it moved | Actor |</p>
+<p>What's <em>missing</em> isn't a storage format — it's transport: the mechanism for an agent to leave one situation and enter another cleanly.</p>
+<h2>Design</h2>
+<h3>Context switch = checkpoint + engage</h3>
+<p>Switching context is the same operation whether the agent returns to the same situation or moves to a new one:</p>
+<p>1. <strong>Checkpoint</strong> — update the current domain's board with what you've done and what comes next. This is the write side. </p>
+<p>2. <strong>Trace</strong> — record the transition in the actor's navigation log: where you were, where you're going, why. </p>
+<p>3. <strong>Engage</strong> — load the new situation's board and index. This is the read side. </p>
+<p>The agent doesn't carry state across the switch. All persistent state lives at the <em>domain</em> (board + index) or in the <em>method</em> (engagement state). The agent is stateless between situations; the trace records what the agent can't hold.</p>
+<h3>The trace</h3>
+<p>Each actor-token maintains a log of its navigation. The trace is private to the actor — different agents at the same situation have different traces.</p>
+<p>``` .claude/trace.md   (or per-session: .claude/traces/<session-id>.md) ```</p>
+<p>Each entry records: timestamp, from-situation, to-situation, trigger (what caused the move). This creates a directed graph of the session's traversal.</p>
+<p>``` 11:00 whatsapp-import → iphone-extraction | need broader extraction plan 11:15 iphone-extraction → cloud-storage   | 309GB backup needs offsite 11:20 cloud-storage → context-stack       | noticed need for context management 12:30 context-stack → write-placement     | file misplacement connects to inscription ```</p>
+<p>The trace serves two purposes:</p>
+<ul><li><strong>Resume</strong>: agent reads its own trace to recall where it's been </li><li><strong>Reconstruction</strong>: trace + boards + indices = lossless session recovery (<a href="coordination-topology">Foundation 07</a> claim) </li></ul>
+<h3>Engagement state (third externalization)</h3>
+<p>The method-axis externalization — where are we in the procedure, what's been done, what comes next. This is the state that the old "stack frames" were trying to capture, but it belongs to the <em>method</em>, not to a separate stack.</p>
+<p>Design TBD. The key constraint: engagement state must be readable by any actor that enters the situation, not just the one that wrote it.</p>
+<h3>When to use subagents vs. context switch</h3>
+<p>Not every transition is a context switch. The decision depends on how much context you need:</p>
+<p>| Scenario | Use | |—-|—-| | Quick lookup, no shared state needed | Subagent (isolated, fresh context) | | Sustained work in new domain | Context switch (checkpoint + engage) | | Deep focus that would evict current context | New session (fresh window) | | Return to previous work | Engage from trace |</p>
+<p>Subagents are for reads. Context switches are for writes that need persistence.</p>
+<h2>Relationship to existing structures</h2>
+<p>| Structure | Scope | Externalizes | |—-|—-|—-| | Board | inter-agent | coordination messages, situation state | | Index | navigational | content structure, what exists here | | Tasks | flat list | work items | | Memory | cross-session | durable patterns | | Session log | post-session | archival record | | <strong>Trace</strong> | <strong>intra-session</strong> | <strong>actor navigation history</strong> | | <strong>Engagement state</strong> | <strong>cross-session</strong> | <strong>method execution position</strong> |</p>
+<h2>Connection to HAAK thesis</h2>
+<p>Context transport makes human steering cheaper. Instead of re-explaining context after a switch, the human says "go back to X" and the agent engages, reads the board, and has the state. The intervention cost drops from explanation to selection.</p>
+<h2>What's built, what's not</h2>
+<p>| Component | Status | |—-|—-| | Board (checkpoint target) | Built, active | | Index (engage target) | Built, active | | Engage skill | Built | | Checkpoint skill | Built (as `/checkpoint`) | | Trace | Designed, not built | | Engagement state | Designed (<a href="coordination-topology">Foundation 07</a>), not built | | Automatic checkpoint-on-exit | Not built — `/bye` updates board but doesn't record trace |</p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

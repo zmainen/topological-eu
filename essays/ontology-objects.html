@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objects — Topological Transmission Theory</title>
+<meta name="description" content="What exists: three axes (actor, method, domain), materials, four bundle types. Type/token, time, agency, normativity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Objects</h1>
+<p class="subtitle">What exists: three axes (actor, method, domain), materials, four bundle types. Type/token, time, agency, normativity.</p>
+<p>This document fixes the model: what exists in this ontology, and how are the objects distinguished from one another? Every term is defined before first use, in dependency order. Relations between objects are stated informally here and formalized in [[02_relations]].</p>
+<p>Four running examples are carried throughout to ground each definition in familiar situations: <em>(a) a student sitting an examination</em>, <em>(b) a doctor diagnosing a patient</em>, <em>(c) a lawyer arguing a case in court</em>, <em>(d) a chef preparing a meal</em>. Each new concept is illustrated with these four before the discussion moves on.</p>
+<p>| Section | What it covers | |—-|—-| | <a href="#primitives">Primitives</a> | <em>Axes</em> and <em>materials</em> — the irreducible furniture | | <a href="#compounds">Compounds</a> | <em>Pattern</em>, <em>situation</em>, <em>policy</em>, <em>engagement</em> — syntheses across axes | | <a href="#properties">Properties</a> | <em>Time</em>, <em>type/token</em>, <em>agency</em>, <em>normativity</em> — aspects of all objects |</p>
+<hr>
+<h2>Primitives</h2>
+<h3>Axes</h3>
+<p><strong>Definition 1 (<em>Axis</em>).</strong> An <em>axis</em> is an irreducible dimension of the space of possible action. Three axes define this space. Changing position on one axis does not force a change on the others.</p>
+<p><em>Independence test:</em> Can you hold two axes fixed and vary the third independently? A student can sit the same exam in the same hall on two occasions — same method, same domain, different actor. A doctor can diagnose the same patient using different methods in the same hospital — same actor, same domain, different method. All three axes pass the test in both directions.</p>
+<p>The three axes are <em>actor</em>, <em>method</em>, and <em>domain</em>. Together they span the space: every action occurs at some position in actor × method × domain.</p>
+<hr>
+<p><strong>Definition 2 (<em>Actor</em>).</strong> An <em>actor</em> is an operator — an entity capable of processing other entities, including itself.</p>
+<p><em>What distinguishes actors from materials</em> (see Definition 5): actors process; materials are processed. The processing relation is the defining asymmetry. A chef processes ingredients; the ingredients do not process the chef. A student processes an exam question; the question does not process the student. A lawyer processes evidence; evidence does not process the lawyer. Self-modification — an actor transforming its own capabilities or structure — is one further level of this same capacity, distinct from processing external materials.</p>
+<p>An <em>actor-type</em> is a capability profile: the kind of actor, specifying what operations it can perform. <em>Student</em>, <em>doctor</em>, <em>lawyer</em>, <em>chef</em> are actor-types. An <em>actor-token</em> is a particular instantiation: Maria the student sitting Tuesday's exam; Dr. Chen diagnosing this patient this morning. A single agent — the person or system that can assume roles — can bear different actor-types at different times or simultaneously.</p>
+<p><em>Internal structure.</em> Actor-types form two distinct orderings. First, <em>specialization</em>: a <em>junior associate</em> specializes <em>lawyer</em>; an <em>apprentice</em> specializes <em>chef</em>; a <em>specialist physician</em> specializes <em>doctor</em>. Each specialization inherits every capability of its parent and adds further constraints or competencies, forming a tree. Second, <em>organizational hierarchy</em>: a judge holds authority over a lawyer in the courtroom; a head chef holds authority over a sous chef in the kitchen. These two orderings are independent — specialization is about capability; hierarchy is about authority within a [[domain]].</p>
+<p><em>Distinguished from <strong>agent</strong> and <strong>persona</strong>.</em> An <em>agent</em> is the substrate — the person, organism, or system that can assume actor-types. A <em>persona</em> is an expressive grounding — voice, epistemic position, characteristic style of action. A persona shapes <em>how</em> an actor performs but is not itself an actor-type. The doctor's bedside manner is a persona; the role of <em>diagnosing physician</em> is the actor-type; the individual Dr. Chen is the agent.</p>
+<hr>
+<p><strong>Definition 3 (<em>Method</em>).</strong> A <em>method</em> is a procedure — a repeatable way of producing a transformation. Methods answer the question <em>how</em>.</p>
+<p>Methods transform both <em>materials</em> and <em>actors</em>. A culinary method transforms ingredients into a dish. A diagnostic method transforms symptoms and test results into a clinical judgment. A pedagogical method transforms a student's knowledge and capabilities — the output is an actor in a different state, not a material object. A therapeutic method transforms a patient's mental state. This is not exceptional — it follows directly from the definition. Actors are legitimate inputs and outputs of methods, not only materials.</p>
+<p>A <em>method-type</em> is the procedure as defined: <em>diagnosis</em>, <em>cross-examination</em>, <em>exam-sitting</em>, <em>braising</em>. Defined once, applicable across many situations. A <em>method-token</em> is a particular execution: this instance of cross-examination in this trial today. Method-tokens are created when a situation instantiates a method-type and cease when execution completes — they are the most ephemeral objects in the ontology.</p>
+<p><em>Internal structure.</em> Two graph structures coexist over the same nodes:</p>
+<p>1. <em>Refinement.</em> Methods refine from abstract to concrete. <em>Diagnosis</em> refines into <em>history-taking</em>, <em>physical examination</em>, <em>laboratory investigation</em>, <em>imaging</em>. <em>Cross-examination</em> refines into <em>opening question</em>, <em>follow-up</em>, <em>impeachment</em>. At the finest grain, a method becomes an executable <em>skill</em> — the minimum unit of execution, not further decomposable into sub-methods. The method→skill relation is refinement within the same axis, not a jump to a new kind of object. </p>
+<p>1. <em>Composition.</em> Methods invoke other methods. Preparing a meal composes braising a sauce, roasting vegetables, and plating. Arguing a case composes examining witnesses, introducing evidence, and delivering a closing. This forms a directed graph with labeled edges. Cycles are possible — diagnosis may invoke additional testing, which re-invokes diagnosis. Composition is intrinsic to the method-type itself; it holds regardless of which situation the method appears in. </p>
+<hr>
+<p><strong>Definition 4 (<em>Domain</em>).</strong> A <em>domain</em> is a context — a bounded scope within which action takes place. Domains answer the question <em>where</em> (and <em>for whom</em>, and <em>within what institutional frame</em>).</p>
+<p>A <em>domain-kind</em> is a category of domain: <em>organizational</em> (a hospital, a law firm, a school, a household), <em>topical</em> (oncology, contract law, mathematics, cuisine), <em>disciplinary</em> (medicine, jurisprudence, education, culinary arts). A <em>domain-instance</em> is a specific context: this hospital in Lisbon, the Paris Bar Association, this secondary school in London, this kitchen on Rua das Flores. Domain-instances exist independently of any particular action occurring within them.</p>
+<p><em>Internal structure: the rooted forest.</em> Domains form a <em>rooted forest</em> — a collection of trees, each with a root node, where every node has exactly one parent except the roots. Think of it as several separate family trees rather than one unified hierarchy. The membership relation between nodes is <em>subsumption</em>: a child domain falls within its parent. The <em>paediatrics ward</em> falls within the <em>hospital</em>; the <em>criminal courts</em> fall within the <em>justice system</em>; the <em>pastry section</em> falls within the <em>kitchen</em>. No subsumption holds between trees: <em>hospital</em> and <em>law firm</em> inhabit different trees and neither contains the other. Cross-tree relations arise only through [[compounds]] (Definition 6), not within the axis itself.</p>
+<p><em>What a domain carries.</em> A domain is not an empty container. It carries <em>resources</em> — the instruments in an operating theatre, the case law accessible in a jurisdiction, the ingredients available in a given kitchen — and the actors who typically inhabit it: doctors and patients in a hospital; judges, lawyers, and defendants in a courtroom.</p>
+<blockquote><p>⚡ <strong>Tension:</strong> It is unclear whether the <em>constraints</em> associated with a domain — "this ward requires sterile technique"; "this court requires formal dress" — belong to the domain itself or to [[policies]] (Definition 12) whose scope includes that domain. Listing constraints as domain properties conflates domain and policy. <em>Tentative position:</em> domains carry resources and actors; normative constraints arise from policies scoped to that domain. Unresolved.</p></blockquote>
+<blockquote><p>⚡ <strong>Tension:</strong> Do resources belong to the <em>domain</em>, to the <em>actors</em> within it, or to the <em>situations</em> that occur in it? A hospital's MRI scanner exists in the domain whether or not anyone is using it. But it becomes available only when actors capable of operating it are present in a situation. Resources may require both domain and actor to become actionable. Unresolved.</p></blockquote>
+<hr>
+<p><strong>Definition 5 (<em>Material</em>).</strong> A <em>material</em> is an operand — an entity that is processed by actors using methods, but does not itself process. Materials answer the question <em>what</em>.</p>
+<p>The asymmetry is definitional and asymmetric in one direction only: actors process materials; materials do not process actors. An exam paper is a material — the student processes it, it does not process the student. A legal brief is a material — the lawyer marks it up, cross-references it, argues from it. Test results are a material — the doctor interprets them. Ingredients are a material — the chef transforms them.</p>
+<p>A <em>material-kind</em> is a category: <em>document</em>, <em>specimen</em>, <em>ingredient</em>, <em>testimony</em>, <em>dataset</em>, <em>artefact</em>. A <em>material-token</em> is a specific instance: this exam paper, this blood sample, this contract draft, these vegetables on this chopping board.</p>
+<p><em>Material identity</em> persists across transformation; <em>material state</em> changes. The patient's biopsy before and after laboratory analysis is the same material-token in a different state. The raw chicken before and after cooking is the same material-token transformed. The exam paper before and after the student writes on it remains the same paper, now bearing new marks.</p>
+<p><em>Affordances.</em> Materials in domains have <em>affordances</em> — they make certain actions possible and others difficult or impossible. An exam paper affords writing but not oral response. A patient's blood sample affords biochemical analysis but not imaging. A courtroom document affords reading aloud, cross-referencing, and entering into the record. Affordances are relational: they depend on both the material's properties and the actor's capabilities. A [[policy]] (Definition 12) can normatively restrict which of the afforded actions are permitted — one may not write on the exam paper before the invigilator signals; one may not share a witness's testimony outside the courtroom — but the affordance exists independently of the permission.</p>
+<hr>
+<h2>Compounds</h2>
+<p>Every action involves all three axes simultaneously: some actor, using some method, within some domain. When we describe a <em>class</em> of actions by specifying a region in actor × method × domain space, or a <em>particular</em> action by specifying a point, we produce a compound. A compound is not a new primitive; it is a synthesis built from all three axes.</p>
+<p><strong>Definition 6 (<em>Compound</em>).</strong> A <em>compound</em> is a synthesis that explicitly or implicitly specifies a region of actor × method × domain space. Every compound references all three axes; the reference may be broad (all actors, all domains) or narrow (one actor-token, one domain-instance), but it is never absent. <em>(Alternative terms: bundle, configuration, composite. Compound is used here to emphasize construction from primitives.)</em></p>
+<p><strong>Definition 7 (<em>Scope</em>).</strong> The <em>scope</em> of a compound is the region it covers in actor × method × domain space. Scope is distinct from context — the resources and actors a domain carries (Definition 4). A compound's scope is the territory in which it applies or what it describes; a domain's context is what it makes available within its boundaries.</p>
+<p><em>Examples of scope at different scales:</em></p>
+<ul><li>"Do no harm" — all actors, all methods, all domains. Maximal scope. </li><li>"Physicians must maintain patient confidentiality" — physician actor-type, any medical method, any healthcare domain. Broad scope. </li><li>"No speaking during this examination" — student actor-type, exam-sitting method, this examination hall. Narrow scope. </li><li>"Dr. Chen must not discuss this patient's case with anyone outside the oncology team today" — one actor-token, one method-token, one situation. Minimal scope. </li></ul>
+<h3>The four compound types</h3>
+<p>Two independent distinctions generate four compound types. <em>Descriptive compounds</em> are presented before normative ones: description precedes prescription. You must know what is before you can say what ought to be.</p>
+<p><strong>Definition 8 (<em>Descriptive vs. normative</em>).</strong> A <em>descriptive</em> compound reports what is, was, or tends to be. It is <em>epistemic</em> — a claim about the world as observed. A <em>normative</em> compound prescribes what should or must be. It is <em>deontic</em> — a claim about what ought to happen. The boundary is not always sharp in practice, but it is conceptually clear: "lawyers in this court typically open with a summary of facts" is descriptive; "lawyers in this court must open with a summary of facts" is normative.</p>
+<p><strong>Definition 9 (<em>Type vs. token</em>).</strong> A <em>type</em> is a general category, applicable to many instances. A <em>token</em> is a particular instance — one specific occurrence in time. Types are defined once; tokens occur. The exam-type <em>written examination</em> can be instantiated as many exam-tokens. The method-type <em>cross-examination</em> can be instantiated in every trial. The relation between type and token is <em>instantiation</em> — a token is <em>of</em> its type.</p>
+<p>| <strong>Type</strong> (general) | <strong>Token</strong> (particular) |  | |—-|—-|—-| | <strong>Descriptive</strong> | <strong><em>Pattern</strong></em> | <strong><em>Situation</strong></em> | | <strong>Normative</strong> | <strong><em>Policy</strong></em> | <strong><em>Engagement</strong></em> |</p>
+<hr>
+<p><strong>Definition 10 (<em>Pattern</em>).</strong> A <em>pattern</em> is a descriptive type-compound: an observed regularity in how situations of a given kind tend to unfold.</p>
+<p><em>What a pattern is.</em> A pattern generalizes from observed tokens. Written examinations are typically conducted in silence, last a fixed duration, and follow a defined format — this is a pattern, abstracted from many exam situations. Diagnoses typically proceed from history-taking through examination to testing to conclusion — a pattern. Trials typically follow prosecution opening, defence opening, witnesses, closing arguments, verdict — a pattern. Meal preparation typically proceeds from ingredient preparation through cooking to plating — a pattern. Patterns describe what tends to happen; they do not require it to happen.</p>
+<p><em>What a pattern is not.</em> A pattern is not a rule. Repetition alone does not create obligation. A doctor who begins with a physical examination rather than a patient history deviates from the common diagnostic pattern but has not broken any rule. The transition from pattern to [[policy]] requires a deliberate act by an actor with the authority to enforce it — a legislature, an institution, a professional body. This act of establishment is itself an action, performed by a specific actor-type (lawmaker, administrator, professional council) in a specific domain. Until that act occurs, the pattern remains a description of what tends to happen, not a prescription of what must.</p>
+<p><em>Internal structure.</em> Phase graphs: directed graphs of stages and transitions, possibly with cycles. A diagnostic pattern: <em>present → history → examine → test → diagnose → treat</em>, with a cycle back to <em>examine</em> or <em>test</em> if results are ambiguous. A trial pattern: <em>opening → evidence → witness → closing → verdict</em>. A particular [[situation]] traces a walk through the pattern's phase graph. <em>(Synonym: schema, in the sense used by Schank (1977) — a cognitive structure for recognizing and anticipating recurring situations.)</em></p>
+<hr>
+<p><strong>Definition 11 (<em>Situation</em>).</strong> A <em>situation</em> is a descriptive token-compound: a particular, ongoing coming-together of actors, methods, and domains around materials. A situation is what is actually happening — not what should happen.</p>
+<p><em>What a situation is.</em> This Tuesday's exam, with these students in this hall. Dr. Chen's morning ward round today. This specific trial, in this courtroom, this week. A situation lives in time: it begins, continues, and ends. While active, it accumulates state — decisions made, materials transformed, phases traversed. When complete, it becomes a historical record.</p>
+<p>A situation may conform to patterns or diverge from them. A student who whispers during an exam diverges from the silence pattern. A doctor who skips the history-taking stage diverges from the diagnostic pattern. Whether either has violated a policy is a separate question — divergence from description is not automatically wrongdoing.</p>
+<p><em>Act.</em> An <em>act</em> is the finest-grained situation: a single method-token executed by a single actor-token. A judge sustaining an objection is an act. A chef adding salt to a sauce is an act. A student writing their name on the exam paper is an act. Acts are atomic in time; situations are sequences or networks of acts.</p>
+<p><em>Relation to [[engagement]].</em> A situation is the descriptive view of an ongoing token. Its normative counterpart — what should be happening — is the <em>engagement</em> (Definition 13). The same exam-session is both a situation (what the invigilator observes) and an engagement (what the student is accountable to).</p>
+<hr>
+<p><strong>Definition 12 (<em>Policy</em>).</strong> A <em>policy</em> is a normative type-compound: a prescription that constrains or permits actions across the region of actor × method × domain space covered by its scope. A policy says what <em>must</em>, <em>should</em>, or <em>may</em> be done when a certain kind of action occurs.</p>
+<p><em>Policies include what are commonly called rules.</em> "No speaking during the exam" is a rule — a policy on student actors performing exam-sitting methods in examination-hall domains. "A physician must obtain informed consent before an invasive procedure" is a professional standard — a policy on physician actors performing clinical methods in healthcare domains. "The accused shall have the right to legal representation" is a law — a policy of maximal deontic strength. Rules, regulations, laws, codes of conduct, professional standards, and informal norms of practice are all policies, differing in formality, strength, and scope breadth.</p>
+<p><em>Scope breadth varies continuously.</em> A foundational norm like "do not harm" covers all actors, all methods, all domains — maximum scope. A professional standard covers a specific actor-type and domain-kind. A specific procedural rule covers narrow scope across all three axes. These are the same kind of object at different scales. What distinguishes a "foundational principle" from a "procedural rule" is not ontological kind but scope extent.</p>
+<p><em>Strength and ground.</em> A policy carries <em>deontic strength</em> — <em>must</em> (obligation), <em>should</em> (recommendation), <em>may</em> (permission) — and a <em>ground</em>, the reason for the policy's existence. "You must not speak during the exam" is an obligation grounded in fairness. "You should cite your sources" is a recommendation grounded in scholarly practice. "You may request additional paper" is a permission grounded in practical accommodation.</p>
+<p><em>Policies do not arise from patterns automatically.</em> Repetition creates expectation, not obligation. Establishing a policy requires an actor with the authority and the intention to create a norm — to specify a scope, a deontic strength, and a ground — and to back that specification with enforcement. The exam invigilator enacts silence. The professional body adopts the code. The legislature passes the statute. Each is an act performed by a specific actor in a specific domain.</p>
+<p><em>Policies accumulate through domain subsumption.</em> A child domain inherits all policies of its parent and may add its own. The paediatrics ward inherits the hospital's policies on confidentiality, hygiene, and consent. A junior associate inherits the firm's policies on client confidentiality. Policies only accumulate in the downward direction — a child cannot remove a parent's policy.</p>
+<hr>
+<p><strong>Definition 13 (<em>Engagement</em>).</strong> An <em>engagement</em> is a normative token-compound: the intentional, goal-directed view of a particular instance of action. An engagement carries purposes, obligations, and accountability.</p>
+<p><em>What an engagement is.</em> The student's engagement in the exam is to demonstrate subject knowledge within the applicable rules. The doctor's engagement with the patient is to reach a diagnosis and initiate appropriate treatment. The lawyer's engagement in the trial is to argue the client's case within the bounds of legal procedure. The chef's engagement in preparing the meal is to produce a dish that satisfies the expected standard. Each engagement bundles: this actor-token, these methods, this domain-instance, the policies in force, and a goal.</p>
+<p><em>Relation to [[situation]].</em> Engagement and situation are two views of the same token. The situation is what is actually occurring; the engagement is the normative frame — what should be occurring, toward what end, under what obligations. The same exam-session is a situation (describable as a sequence of acts) and an engagement (accountable in terms of the exam's goals and rules). When a student cheats, the situation records what happened; the engagement specifies what was violated.</p>
+<p><em>Act.</em> As with situations, the finest-grained engagement is an <em>act</em> — a single method-token executed by a single actor-token with a purpose. The act is where situation and engagement coincide at their smallest grain.</p>
+<p><em>Internal structure.</em> An engagement has a phase position (where in the relevant pattern's phase graph), sub-engagements (a trial engagement contains sub-engagements for each witness examination; a medical engagement contains sub-engagements for each diagnostic phase), accumulated obligations (the policies currently in force), and goals (desired outcomes).</p>
+<hr>
+<p><strong>Definition 14 (<em>Constitution</em>).</strong> A <em>constitution</em> is a policy of maximal scope — applying to all actors, all methods, all domains — whose subject is the creation and amendment of other policies. It prescribes how the normative order itself may be changed.</p>
+<p><em>Governance.</em> The set of mechanisms by which policies are established, applied, monitored, and amended is the <em>governance</em> of a system. A constitution is the highest level of governance: it sets the rules for rule-making. Without a constitution, governance is ad hoc — norms exist, but their authority is unclear and their amendment unprincipled. Every stable normative order has at least an implicit constitution.</p>
+<hr>
+<h2>Properties</h2>
+<p>Four properties run through all objects. They are not additional objects — they are aspects that every object exhibits.</p>
+<p><strong>Time.</strong> Every object has temporal properties: creation, duration, and expiration. Time is not an axis; it is universal. An act lasts seconds; an examination lasts hours; a professional career lasts decades; a legal code may last centuries. These are differences of degree, not of kind. All objects are created, may change, and can be extinguished.</p>
+<p><strong>Type and token.</strong> Every object kind admits a type/token distinction (Definition 9). Types are general, defined once. Tokens are particular, situated in time. The relation between type and token is <em>instantiation</em> — a token is of its type. This relation is formalized in [[02_relations]].</p>
+<p><strong>Agency.</strong> The fundamental divide among entities: operators vs. operands. Actors process; materials are processed. This asymmetry is not always sharp at the boundary — a student being trained is an actor whose capabilities are being transformed by a teaching method — but within any given act, the processing relation is directed. What can bear an actor-type is whatever exercises a method; what can only be a material is whatever cannot.</p>
+<p><strong>Normativity.</strong> The fundamental divide among compounds (Definition 8): descriptive vs. normative. Patterns and situations describe — they report what is or tends to be. Policies and engagements prescribe — they specify what must or should be, toward what end. The normative/descriptive distinction is orthogonal to the type/token distinction, generating the 2×2. Other terms for the normative side: <em>intentional</em>, <em>goal-directed</em>, <em>governed</em>, <em>deontic</em>.</p>
+<hr>
+<p><em>ontology · 2026-02-24 · zach + claude</em></p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>

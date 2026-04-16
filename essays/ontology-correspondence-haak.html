@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Correspondence IV: HAAK — Topological Transmission Theory</title>
+<meta name="description" content="HAAK mapped to its own ontology. Axis assignments, compound assignments, constitutional scope analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px); color: var(--cream); margin-bottom: 16px;
+  margin-top: 40px;
+}
+h3 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px); color: var(--cream); margin-bottom: 12px;
+  margin-top: 32px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+blockquote {
+  margin: 16px 0; padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04); border-radius: 0 4px 4px 0;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2);
+}
+blockquote p { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--line2); margin: 40px 0; }
+ul { margin: 0 0 1em 1.5em; font-weight: 300; }
+li { margin-bottom: 0.3em; }
+strong { font-weight: 400; color: var(--cream); }
+em { font-style: italic; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver);
+}
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.nav-home { font-family: 'Gloock', serif; font-size: 18px; color: var(--cream); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.content {
+  max-width: 700px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px;
+}
+.card {
+  border: 1px solid var(--line2); border-radius: 4px;
+  padding: 16px 20px; background: var(--bg2);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--gold); }
+.card-title {
+  font-family: 'Gloock', serif; font-size: 16px; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--cream2);
+}
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.badge {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s; display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/essays/" class="back-link">&larr; essays</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+    <a href="/concepts/">concepts</a>
+  </div>
+</nav>
+<div class="content">
+<h1>Correspondence IV: HAAK</h1>
+<p class="subtitle">HAAK mapped to its own ontology. Axis assignments, compound assignments, constitutional scope analysis.</p>
+<p>The first three correspondences (POSIX, football, Harvard) validated the ontology against external systems. This correspondence applies the ontology reflexively — mapping HAAK's own constructs to the definitions in [[01-objects]] as revised by the relational reading in [[04-correspondence_v1-2]]. Every HAAK structural feature receives an ontological assignment. Open questions are marked with ⚡.</p>
+<p>This document has a normative consequence the other three do not: where the mapping reveals that HAAK's current structure diverges from the ontology HAAK itself defines, the divergence is a flaw in the structure, not in the ontology. The ontology is the standard; the system must be brought into conformance.</p>
+<p>| Section | What it covers | |—-|—-| | <a href="#axis-correspondences">Axis correspondences</a> | Actors, methods, domains, materials | | <a href="#compound-correspondences">Compound correspondences</a> | Patterns, situations, policies, engagements, constitution | | <a href="#the-type-system-question">The type system question</a> | Reconciling the constitution's types with the ontology's | | <a href="#constitutional-scope">Constitutional scope</a> | What should have constitutional status | | <a href="#open-questions">Open questions</a> | What doesn't map cleanly |</p>
+<hr>
+<h2>Axis Correspondences</h2>
+<h3>IV.1 Actors</h3>
+<p>Three substrate kinds bear actor-types in HAAK:</p>
+<p>| Substrate | Actor-types | Actor-tokens | Actor-power | |—-|—-|—-|—-| | The PI (Zach) | super-architect, requester | singular | Maximal — analogous to root (I.1), the Corporation (III.1) | | Claude sessions | architect, editor, reviewer, copy-editor, writer, auditor, librarian | Each session is a token, identified by `[model:session8:context]` | Varies by profile — architect has broader scope than reviewer | | Scripts/hooks | service-monitor, session-starter | Each execution is a token | Minimal — hooks observe and report, they do not decide |</p>
+<p>Agent profiles (`.claude/agents/*.md`) define actor-types: capability profiles specifying what operations an actor can perform, what tools it has access to, and what skills it invokes. This maps cleanly to Definition 2 — actor-types specify "what operations it can perform."</p>
+<p><strong>Specialization.</strong> Agent profiles form a refinement tree rooted in the generic Claude session. The architect specializes toward system-modifying operations; the reviewer specializes toward assessment. Under the ontology's two orderings (specialization and organizational hierarchy), the current HAAK agents have specialization (architect ≠ reviewer ≠ editor) but minimal hierarchy — the PI holds authority over all agents equally. There is no intermediate hierarchy among agents.</p>
+<p><strong>Personas</strong> (`personas/<em>.md</em>`) are the ontology's "expressive grounding — voice, epistemic position, characteristic style of action" (Definition 2). A reviewer agent bears a persona that shapes how<em> it reviews. The persona is not an actor-type — it does not define capabilities. It defines orientation. </em>Clean.*</p>
+<blockquote><p>⚡ <strong>Open IV.1.A (<em>origin tag conflation</em>).</strong> The origin tag `[claude:sonnet-4-6:a16dc698:haak-infra]` conflates four ontological objects: agent substrate (`claude`), actor-type capability (`sonnet-4-6` — really a model, which constrains capability), actor-token identity (`a16dc698`), and engagement context (`haak-infra`). Under the ontology, these should be distinguishable: agent, actor-type, actor-token, engagement. The tag is pragmatically adequate but ontologically imprecise.</p></blockquote>
+<h3>IV.2 Methods</h3>
+<p>Methods in HAAK map to Definition 3 with a three-level refinement hierarchy:</p>
+<p>``` 5-step workflow (meta-pattern: Define → Collect → Reason → Act → Validate) ├── review (method-type, specializes 5-step) │   ├── manuscript (pattern within review, specifies deltas) │   ├── proposal (pattern within review) │   ├── idea (pattern within review) │   └── architecture (pattern within review — not yet formalized) ├── write (method-type) │   ├── opinion (pattern within write) │   ├── manuscript (pattern within write) │   └── revision (pattern within write) ├── search (method-type) ├── ingest (method-type) ├── architect (method-type) └── ... (audit, persona, preregister, sweep, disclose, interview, gdrive-import) ```</p>
+<p>At the finest grain, methods become <strong>skills</strong> — executable primitives invoked as `/commands`. This maps exactly to Definition 3: "At the finest grain, a method becomes an executable skill — the minimum unit of execution, not further decomposable into sub-methods. The method→skill relation is refinement within the same axis."</p>
+<p><strong>Composition</strong> is confirmed: review composes search (at Collect), persona-selection (at Collect), write (at Act). The 5-step provides the compositional interface — "the interface between composed methods is always a step boundary" (11-five-step.md).</p>
+<p><strong>Maturity</strong> is a tag on method-types: `observed` → `stable` → `enforced`. This has no direct ontological analog — it is a property of the normative status of a descriptive compound. An `observed` method is a pattern (descriptive type); when promoted to `enforced`, it becomes a policy (normative type). Maturity is the promotion path from pattern to policy. <em>Clean under the stance interpretation.</em></p>
+<p><strong>Method inheritance.</strong> Each method inherits the 5-step's structure and specifies only its deltas. Each pattern within a method inherits the method's structure and specifies only its deltas. This is exactly the refinement relation of Definition 3: "methods refine from abstract to concrete." The inheritance is documented in `11-five-step.md` (the instantiation tables). <em>Clean.</em></p>
+<h3>IV.3 Domains</h3>
+<p>The directory hierarchy is the domain forest. This is the same correspondence as POSIX (I.3), and it is the most structurally exact mapping in the system.</p>
+<p>| HAAK directory | Domain kind | Domain-scope | |—-|—-|—-| | `/` (project root) | organizational | Maximal within HAAK | | `patterns/` | process | Cross-cutting — methods, policies, architecture | | `ontology/` | topical | The conceptual ground | | `projects/` | organizational | Container for all project domains | | `projects/ai-ontology/` | topical | One research program | | `projects/ai-ontology/inscription-agents/` | topical | One manuscript project | | `data/` | activity | System-wide data stores | | `strategy/` | activity | Portfolio-level planning |</p>
+<p><strong>Subsumption</strong> holds at every parent/child edge. Policies scoped to `projects/` constrain all projects. Policies scoped to a specific manuscript constrain only that engagement. <em>Clean.</em></p>
+<p><strong>Index files</strong> (`index.md` in every directory) are materials that carry method-property — they encode a navigational method (progressive disclosure). They also define the domain's scope: the index says what the domain contains. Under the relational revision, this bundling (material-property + method-property) is accepted. <em>Clean.</em></p>
+<p><strong>Board files</strong> (`board.md` in active directories) are materials within domain-instances. They carry communication state for that domain. Under the relational revision, a board has high material-malleability (agents read and append to it) and some domain-property (it constitutes a communication context). The board is not itself a domain — it is a material-token within one. <em>Clean under relational reading.</em></p>
+<h3>IV.4 Materials</h3>
+<p>| Material-kind | Examples | Material-malleability | |—-|—-|—-| | Documents | Markdown files, PDFs, session transcripts | High for PI and author agents; read-only for reviewers | | Databases | `data/papers.db`, `data/contacts.db`, `data/music.db` | High for skills that write to them; query-only for agents | | Board entries | Timestamped lines in `board.md` | Zero after creation (immutable by design) | | Images/media | Photos, figures, audio recordings | Processable (vision, transcription) but typically not mutated | | Session transcripts | `sources/YYYY-MM-DD-session.md` | Zero after export (archival) |</p>
+<p><strong>Material identity</strong> persists across transformation: a manuscript before and after revision is the same material-token in a different state (Definition 5). Version control (git) makes this explicit — the file's identity persists across commits.</p>
+<p><strong>Affordances</strong> are actor-relative: a manuscript affords assessment for a reviewer, revision for an author, and editorial judgment for an editor. The same material, different affordances depending on the actor's capabilities. <em>Clean under relational reading.</em></p>
+<hr>
+<h2>Compound Correspondences</h2>
+<h3>IV.5 Patterns (descriptive type-compounds)</h3>
+<p>Patterns in HAAK are documented in `patterns/`:</p>
+<ul><li>`patterns/architecture/` — structural patterns (how the system is built) </li><li>`patterns/features/` — development records of capabilities </li><li>`patterns/methods/` — procedural patterns (how work is done) </li></ul>
+<p>The 5-step workflow is the most important pattern: a descriptive type-compound capturing the observed regularity in how HAAK methods unfold. It generalizes from many specific method executions into a repeatable structure (Definition 10). It was abstracted from observed practice, not imposed — making it descriptive, not normative. <em>Clean.</em></p>
+<p>The progressive disclosure pattern (index → summary → full content) is another: an observed regularity in how information is organized throughout the system.</p>
+<p>The board convention (per-folder `board.md`, origin tags, append-only entries, archive at threshold) is a pattern in active use.</p>
+<h3>IV.6 Situations (descriptive token-compounds)</h3>
+<p>A <strong>session</strong> is the primary situation in HAAK: a particular, ongoing coming-together of actor (Claude session or PI), methods (skills invoked), and domain (project context). Sessions begin, accumulate state (board posts, file edits, decisions), and end. While active, a session is a situation (Definition 11). When complete, it becomes a historical record (session transcript in `sources/`).</p>
+<p>A <strong>board thread</strong> is a micro-situation: a sequence of entries between agents on a topic, observable on the board, with a beginning (first entry) and an end (indexing/archiving).</p>
+<p>A <strong>review round</strong> is a situation: this panel, reviewing this manuscript, producing these outputs, in this round.</p>
+<h3>IV.7 Policies (normative type-compounds)</h3>
+<p>Policies are documented in `patterns/policies/`:</p>
+<p>| Policy | Scope (actors × methods × domains) | Deontic strength | |—-|—-|—-| | 01-constitution | All × all × all | Must (maximal) | | 02-file-structure | All agents × file operations × all directories | Must | | 03-external-content | All agents × ingest methods × external sources | Should | | 04-source-tracking | All agents × review/write × source-bearing domains | Must | | 05-anti-groupthink | Reviewer agents × review methods × review domains | Must | | 06-model-selection | All agents × model-invoking methods × all | Should |</p>
+<p>Policy accumulation through domain subsumption is confirmed: `01-constitution` applies everywhere; domain-specific policies apply within their scope and accumulate downward.</p>
+<p><strong>The six constitutional requirements</strong> are policies embedded within the constitution. Their scope is maximal (all actors, all methods, all domains). They are: externalization, human authority, reflexive improvement, AI attribution, auditability, privacy.</p>
+<h3>IV.8 Engagements (normative token-compounds)</h3>
+<p>An <strong>engagement</strong> in HAAK (invoked via `/engage`) is a normative token-compound: it specifies what should be happening (goals), under what obligations (policies in force), by whom (actor-token), in what domain (project context). This maps exactly to Definition 13.</p>
+<p>A <strong>review engagement</strong> bundles: these reviewers (actor-tokens), reviewing this manuscript (material), using the manuscript review pattern (method), in this project domain, under review policies (anti-groupthink, source-tracking), toward the goal of producing an assessment.</p>
+<p>Engagement state is tracked in files: `_next.md` (resume point), board posts (current status), project indices (accumulated outputs).</p>
+<h3>IV.9 Constitution</h3>
+<p>`patterns/policies/01-constitution.md` is a policy of maximal scope whose subject is the creation and amendment of other policies (Definition 14). It prescribes:</p>
+<ul><li>What the system is for (purpose) </li><li>Six requirements that constrain all action </li><li>A type system that classifies system constructs </li><li>Format requirements for methods and policies </li><li>An amendment clause (PI approval required) </li></ul>
+<p><em>Clean as a structural correspondence.</em> But see <a href="#the-type-system-question">The type system question</a> for where the constitution's internal taxonomy diverges from the ontology's.</p>
+<hr>
+<h2>The Type System Question</h2>
+<p>The constitution defines a type system: <strong>Constitution → Policies → Methods → Skills → Foundations → Features</strong>. The ontology defines a different classificatory framework: <strong>axes (actor, method, domain) + materials + four compounds (pattern, situation, policy, engagement)</strong>. These are not the same classification, and bringing them into alignment is the central task.</p>
+<h3>Reconciliation</h3>
+<p>| Constitution type | Ontological assignment | Notes | |—-|—-|—-| | <strong>Constitution</strong> | Policy of maximal scope (Def. 14) | <em>Exact match</em> | | <strong>Policies</strong> | Normative type-compounds (Def. 12) | <em>Exact match</em> | | <strong>Methods</strong> | Method-types with internal structure (Def. 3) | <em>Exact match</em> — methods in `patterns/methods/` are method-types with refinement and composition | | <strong>Skills</strong> | Method-types at finest refinement grain (Def. 3) | <em>Exact match</em> — "at the finest grain, a method becomes an executable skill" | | <strong>Foundations</strong> | Materials carrying policy-grounds | Foundations are not patterns (not descriptive of what tends to happen). They are the <em>grounds</em> of policies — the reasons for the normative order (Def. 12: "a policy carries a ground"). Ontologically, foundations are materials with high method-property: they encode the reasoning that justifies policies. | | <strong>Features</strong> | Materials representing engagements | Features are development records — materials that stand in for completed or ongoing engagements. Under the representation relation (Open IV.R), they are materials that represent how capabilities were developed. |</p>
+<h3>What the reconciliation reveals</h3>
+<p>1. <strong>Methods and skills are on the same axis.</strong> The constitution treats them as separate types; the ontology treats them as the same type at different refinement levels. The constitution should acknowledge this: skills are methods, not a separate kind. </p>
+<p>1. <strong>Foundations are not a separate ontological kind.</strong> They are materials that ground policies. The constitution's separate listing is pragmatically useful (they deserve their own directory) but ontologically they are materials, not a sixth kind of object. </p>
+<p>1. <strong>Features are not a separate ontological kind.</strong> They are materials representing engagements. Again, pragmatically useful as a category but ontologically they are materials with a particular representational function. </p>
+<p>1. <strong>Patterns are missing from the constitution's type system.</strong> The ontology has patterns (descriptive type-compounds); the constitution's type system does not list them. Yet `patterns/architecture/` is full of them. The constitution should add Pattern as a type: "observed regularities — what tends to happen." </p>
+<p>1. <strong>Situations and engagements are missing.</strong> The constitution's type system is entirely about types (general categories). It has no vocabulary for tokens (particular instances). Sessions, review rounds, board threads — these are situations and engagements, and the constitution doesn't name them. This is appropriate: a constitution governs types (rules for rule-making), not particular instances. But the absence should be noted rather than accidental. </p>
+<hr>
+<h2>Constitutional Scope</h2>
+<p>What should have constitutional status — maximal scope, governing governance?</p>
+<h3>Currently constitutional (in 01-constitution.md)</h3>
+<p>1. Purpose statement </p>
+<p>2. Six requirements (externalization, human authority, reflexive improvement, AI attribution, auditability, privacy) </p>
+<p>3. Type system definition </p>
+<p>4. Format requirements for methods and policies </p>
+<p>5. Amendment clause </p>
+<h3>Should be added to the constitution</h3>
+<p>1. <strong>Ontological grounding.</strong> The constitution should reference the ontology as the conceptual ground of its type system. The ontology defines actor, method, domain, material, and the four compounds. The constitution uses these concepts (methods, policies, skills) without grounding them in the ontology that defines them. Add: "The type system is grounded in the ontology at `<a href="ontology-objects">ontology-objects</a>`. Terms used here (method, policy, domain, scope) are defined there." </p>
+<p>1. <strong>The domain forest.</strong> The directory hierarchy is the domain hierarchy. This is structural, not incidental — policies accumulate through directory subsumption. This should be constitutional: "HAAK's domain structure is the directory hierarchy. Child directories subsume under parents. Policies scoped to a parent apply to all children." </p>
+<p>1. <strong>Human authority as maximal actor-power.</strong> The current wording ("The PI has final authority") should be grounded: "The PI holds maximal actor-power within all HAAK domains. No agent action can constrain the PI's authority." </p>
+<p>1. <strong>Method inheritance from the 5-step pattern.</strong> All methods follow the 5-step shape. This compositional constraint should be constitutional: "Methods follow the Define → Collect → Reason → Act → Validate shape. Each method specifies its deltas from the general pattern." </p>
+<h3>Should remain policy (not constitutional)</h3>
+<p>File structure conventions, external content handling, source tracking, anti-groupthink, model selection, board protocol. These are normative type-compounds of narrower scope than the constitution. They constrain specific actor/method/domain combinations, not all of them.</p>
+<h3>Should be explicitly identified as patterns (not policies)</h3>
+<p>The 5-step workflow, progressive disclosure, the board convention, directory indexing, the skill anatomy (SKILL.md format). These are descriptive type-compounds — observed regularities that methods tend to follow. When a pattern is promoted to `enforced` maturity, it becomes a policy. Before that, it remains a pattern.</p>
+<hr>
+<h2>Open Questions</h2>
+<blockquote><p>⚡ <strong>Open IV.A (<em>foundations as policy-grounds</em>).</strong> If foundations are materials carrying policy-grounds, their special status in the constitution's type system is pragmatic, not ontological. Should the type system be revised to align with the ontology (dropping Foundations as a separate kind and treating them as materials), or should the pragmatic classification be preserved and annotated? The relational reading permits both — what matters is that the relationship (foundation grounds policy) is explicit.</p></blockquote>
+<blockquote><p>⚡ <strong>Open IV.B (<em>the 5-step as pattern or constitution</em>).</strong> The 5-step workflow is currently a pattern (descriptive type). If it becomes constitutional ("all methods must follow this shape"), it transitions to a policy — a normative type-compound of maximal scope within the method axis. This changes its ontological status. The tension: is the 5-step an observed regularity that methods happen to follow (pattern), or a requirement that they must follow (policy)? Its current status (`patterns/methods/11-five-step.md`) implies pattern. Making it constitutional implies policy. The user's directive suggests the latter.</p></blockquote>
+<blockquote><p>⚡ <strong>Open IV.C (<em>method maturity as stance transition</em>).</strong> Under Move 2, the normative/descriptive distinction is a stance. Method maturity (observed → stable → enforced) is a transition in dominant stance: an `observed` method is approached with descriptive stance (this is what we do); an `enforced` method is approached with normative stance (this is what we must do). The object is the same; the stance shifts. This is the cleanest account of method promotion but it means the same document can be simultaneously a pattern (descriptive stance) and a policy (normative stance) depending on who approaches it. Under the relational revision, this is accepted.</p></blockquote>
+<blockquote><p>⚡ <strong>Open IV.D (<em>HAAK as institution</em>).</strong> HAAK bundles high actor-power (it processes materials, transforms actors, creates norms) with high domain-scope (it defines the territory within which all its action occurs). Under the resolution of Gap IV.1 (v1.2), this makes HAAK an institution — an entity with jointly high actor-power and domain-scope. The PI is the institution's governance agent, analogous to Harvard's Corporation or FIFA. Whether HAAK's institutional status should be explicit in the constitution is open.</p></blockquote>
+<blockquote><p>⚡ <strong>Open IV.E (<em>representation and progressive disclosure</em>).</strong> Index files, board summaries, session exports, and features all represent other objects: indices represent domains, board summaries represent archived situations, features represent engagements. This representation relation (Open IV.R from v1.2) is pervasive in HAAK. Progressive disclosure — the defining architectural pattern — is fundamentally about layered representation: each layer represents the layer below at lower resolution. A full account requires the representation relation to be formalized in `02-relations.md`.</p></blockquote>
+<hr>
+<p><em>ontology · correspondence IV · HAAK self-mapping · 2026-02-28 · zach + claude</em></p>
+</div>
+<footer>
+  <span>topological.eu</span>
+  <span>Zachary F. Mainen</span>
+</footer>
+</body>
+</html>
