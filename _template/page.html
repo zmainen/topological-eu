@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><!-- TITLE --> — Topological Transmission Theory</title>
+<meta name="description" content="<!-- DESCRIPTION -->">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* === Palette === */
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0f1424;
+  --cream: #e8e0d4;
+  --cream2: #7a8580;
+  --gold: #c9a96e;
+  --gold-dim: #2a2318;
+  --silver: #8a7898;
+  --line: #1a2028;
+  --line2: #242d38;
+}
+
+/* === Base === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+
+/* === Typography === */
+h1 {
+  font-family: 'Gloock', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--cream);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Gloock', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 3.5vw, 30px);
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+h3 {
+  font-family: 'Gloock', serif;
+  font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 22px);
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+p { margin-bottom: 1em; font-weight: 300; }
+.subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(14px, 2vw, 20px);
+  color: var(--cream2);
+  line-height: 1.5;
+  max-width: 600px;
+}
+.epigraph {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(13px, 1.4vw, 16px);
+  color: var(--cream2);
+  opacity: 0.6;
+  text-align: center;
+  padding: 12px 28px 0;
+}
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* === Nav === */
+nav {
+  padding: 16px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.nav-home {
+  font-family: 'Gloock', serif;
+  font-size: 18px;
+  color: var(--cream);
+}
+.nav-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.back-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+
+/* === Layout === */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+.content-wide {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+section {
+  padding: 48px 0;
+  border-top: 1px solid var(--line2);
+}
+section:first-child { border-top: none; }
+
+/* === Cards === */
+.card {
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  padding: 16px 20px;
+  background: var(--bg2);
+}
+.card-title {
+  font-family: 'Gloock', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.card-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream2);
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* === Badges === */
+.badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+/* === Pill links === */
+.pill {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  color: var(--gold);
+  transition: background 0.2s;
+}
+.pill:hover { background: var(--gold-dim); }
+
+/* === Callout === */
+.callout {
+  margin: 16px 0;
+  padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201,169,110,0.04);
+  border-radius: 0 4px 4px 0;
+}
+
+/* === Button links (landing-page style) === */
+.btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 8px 20px;
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s;
+  display: inline-block;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+
+/* === Footer === */
+footer {
+  border-top: 1px solid var(--line2);
+  padding: 20px 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--cream2);
+}
+
+/* === Responsive === */
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content, .content-wide { padding: 32px 16px 60px; }
+  .card-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="back-link">&larr; topological.eu</a>
+  <div class="nav-links">
+    <!-- NAV -->
+  </div>
+</nav>
+
+<!-- CONTENT -->
+
+<footer>
+  <span>topological.eu</span>
+  <span><!-- FOOTER --></span>
+</footer>
+
+</body>
+</html>
