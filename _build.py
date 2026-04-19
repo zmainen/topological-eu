@@ -163,7 +163,7 @@ def make_page(title, description, body_html, back_href="/", back_label="&larr; t
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{html.escape(title)} — Topological Transmission Theory</title>
+<title>{html.escape(title)} — Topological Theory of Things</title>
 <meta name="description" content="{html.escape(description)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -374,7 +374,7 @@ def build_essays():
 
     index_body = f'''<div class="content-wide">
 <h1>Essays</h1>
-<p class="subtitle">Long-form writing on Topological Transmission Theory — the relational situational ontology and its applications.</p>
+<p class="subtitle">Long-form writing on Topological Theory of Things — the relational situational ontology and its applications.</p>
 
 <section>
 <h2>Foundations</h2>
@@ -393,7 +393,7 @@ def build_essays():
 </section>
 </div>'''
 
-    index_page = make_page("Essays", "Long-form writing on Topological Transmission Theory", index_body)
+    index_page = make_page("Essays", "Long-form writing on Topological Theory of Things", index_body)
     with open(os.path.join(DEST, "index.html"), 'w') as f:
         f.write(index_page)
 

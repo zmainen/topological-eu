@@ -1,3 +1,3 @@
 # topological.eu
 
-Home of Topological Transmission Theory.
+Home of Topological Theory of Things.

@@ -8,7 +8,7 @@ Replace these HTML comments with actual content:
 
 | Placeholder | Where | What |
 |:--|:--|:--|
-| `<!-- TITLE -->` | `<title>` tag | Page title (appears before " — Topological Transmission Theory") |
+| `<!-- TITLE -->` | `<title>` tag | Page title (appears before " — Topological Theory of Things") |
 | `<!-- DESCRIPTION -->` | `<meta>` tag | One-line summary for search engines / link previews |
 | `<!-- NAV -->` | Inside `.nav-links` | Navigation links (`<a>` elements, uppercase mono style applied automatically) |
 | `<!-- CONTENT -->` | Between `</nav>` and `<footer>` | Page body — use `.content` (700px prose), `.content-wide` (1100px layouts), or custom |
