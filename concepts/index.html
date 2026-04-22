@@ -529,9 +529,27 @@ const searchInput = document.getElementById('search-input');
 let W, H, cx, cy;
 let zoom = 1, panX = 0, panY = 0;
 let selected = null;
-let positions = {};
+let cachedPositions = null; // Fix 2: cached layout
 let searchTerm = "";
 let filters = { ring: "", family: "", maturity: "", author: "" };
+
+// Fix 3: rAF-based view updates
+let viewDirty = false;
+function requestViewUpdate() {
+  if (!viewDirty) {
+    viewDirty = true;
+    requestAnimationFrame(() => {
+      updateView();
+      viewDirty = false;
+    });
+  }
+}
+
+function invalidatePositions() { cachedPositions = null; }
+function getPositions() {
+  if (!cachedPositions) cachedPositions = layoutConcepts();
+  return cachedPositions;
+}
 
 function resize() {
   W = wrap.clientWidth; H = wrap.clientHeight;
@@ -565,11 +583,17 @@ function isVisible(c) {
   return true;
 }
 
-function screenX(wx) { return cx + (wx + panX) * zoom; }
-function screenY(wy) { return cy + (wy + panY) * zoom; }
+// Fix 1: updateView() only sets the container group transform — no DOM rebuild
+function updateView() {
+  const graphContent = document.getElementById('graph-content');
+  if (!graphContent) return;
+  const bgRect = document.getElementById('bg-rect');
+  if (bgRect) { bgRect.setAttribute('width', W); bgRect.setAttribute('height', H); }
+  graphContent.setAttribute('transform', `translate(${cx},${cy}) scale(${zoom}) translate(${panX},${panY})`);
+}
 
 function render() {
-  positions = layoutConcepts();
+  const positions = getPositions();
   let html = '';
 
   // Defs: gaussian blur for glow
@@ -579,19 +603,20 @@ function render() {
   html += '<radialGradient id="bg-grad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#121830"/><stop offset="100%" stop-color="#0a0e1a"/></radialGradient>';
   html += '</defs>';
 
-  // Background
-  html += `<rect x="0" y="0" width="${W}" height="${H}" fill="url(#bg-grad)"/>`;
+  // Background (outside transform group so it fills the viewport)
+  html += `<rect id="bg-rect" x="0" y="0" width="${W}" height="${H}" fill="url(#bg-grad)"/>`;
 
-  // Ring guides
+  // Fix 1: all graph content inside a single transform group
+  html += `<g id="graph-content" transform="translate(${cx},${cy}) scale(${zoom}) translate(${panX},${panY})">`;
+
+  // Ring guides (positioned in world coords now)
   for (let i = 1; i <= 7; i++) {
-    const r = RING_RADII[i] * zoom;
-    html += `<circle cx="${screenX(0)}" cy="${screenY(0)}" r="${r}" fill="none" stroke="#2a3050" stroke-width="0.5" opacity="0.06"/>`;
+    html += `<circle cx="0" cy="0" r="${RING_RADII[i]}" fill="none" stroke="#2a3050" stroke-width="${0.5/zoom}" opacity="0.06"/>`;
   }
 
   // Determine selected ancestry/descendants
   let ancestors = new Set(), descendants = new Set(), chainEdges = new Set();
   if (selected) {
-    // BFS ancestors
     const q = [selected];
     ancestors.add(selected);
     while (q.length) {
@@ -599,7 +624,6 @@ function render() {
       const c = cMap[cur];
       if (c) (c.presupposes||[]).forEach(p => { if (!ancestors.has(p)) { ancestors.add(p); q.push(p); } chainEdges.add(p+'->'+cur); });
     }
-    // BFS descendants
     const q2 = [selected];
     descendants.add(selected);
     while (q2.length) {
@@ -614,14 +638,14 @@ function render() {
 
   const chain = new Set([...ancestors, ...descendants]);
 
-  // Edges
+  // Edges (world coordinates — transform group handles pan/zoom)
   CONCEPTS.forEach(c => {
     if (!positions[c.id]) return;
     (c.presupposes||[]).forEach(pid => {
       if (!positions[pid]) return;
       const src = positions[pid], tgt = positions[c.id];
-      const sx = screenX(src.x), sy = screenY(src.y), tx = screenX(tgt.x), ty = screenY(tgt.y);
-      const mx = (sx+tx)/2, my = (sy+ty)/2 - 20*zoom;
+      const sx = src.x, sy = src.y, tx = tgt.x, ty = tgt.y;
+      const mx = (sx+tx)/2, my = (sy+ty)/2 - 20;
       const edgeKey = pid+'->'+c.id;
       const inChain = chainEdges.has(edgeKey);
       const srcFam = familyOf(cMap[pid]||c);
@@ -631,16 +655,16 @@ function render() {
         if (inChain) { op = 0.6; sw = 1.8; } else { op = 0.03; }
       }
       if (!isVisible(c) && !isVisible(cMap[pid]||c)) op = 0.02;
-      html += `<path d="M${sx},${sy} Q${mx},${my} ${tx},${ty}" fill="none" stroke="${col}" stroke-width="${sw*zoom}" opacity="${op}"/>`;
+      html += `<path d="M${sx},${sy} Q${mx},${my} ${tx},${ty}" fill="none" stroke="${col}" stroke-width="${sw}" opacity="${op}"/>`;
     });
   });
 
-  // Nodes + labels
+  // Nodes + labels (world coordinates)
   CONCEPTS.forEach(c => {
     if (!positions[c.id]) return;
     const pos = positions[c.id];
-    const x = screenX(pos.x), y = screenY(pos.y);
-    const r = nodeRadius(c) * zoom;
+    const x = pos.x, y = pos.y;
+    const r = nodeRadius(c);
     const fam = familyOf(c);
     const col = familyColor(fam);
     const mat = MAT_CFG[c.maturity] || MAT_CFG.developed;
@@ -672,11 +696,13 @@ function render() {
       const lx = x + Math.cos(angle) * (r + 8);
       const ly = y + Math.sin(angle) * (r + 3);
       const anchor = Math.abs(angle) > Math.PI/2 ? "end" : "start";
-      const fs = ring === 0 ? 13*zoom : (ring <= 2 ? 10.5*zoom : 9*zoom);
+      const fs = ring === 0 ? 13 : (ring <= 2 ? 10.5 : 9);
       html += `<text x="${lx}" y="${ly}" fill="${col.dim}" font-family="'Crimson Pro',serif" font-size="${fs}" text-anchor="${anchor}" dominant-baseline="middle" opacity="${nodeOp > 0.5 ? 0.9 : nodeOp}">${c.name}</text>`;
     }
     html += '</g>';
   });
+
+  html += '</g>'; // close #graph-content
 
   svg.innerHTML = html;
 
@@ -687,8 +713,23 @@ function render() {
     g.addEventListener('mousemove', e => moveTooltip(e));
     g.addEventListener('mouseleave', hideTooltip);
     g.addEventListener('click', e => { e.stopPropagation(); selectConcept(id); });
-    // Touch
-    g.addEventListener('touchend', e => { e.preventDefault(); selectConcept(id); });
+    // Fix 7: touch — record start position, only select if not dragged
+    let touchStartPos = null;
+    g.addEventListener('touchstart', e => {
+      touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, {passive: true});
+    g.addEventListener('touchend', e => {
+      if (touchStartPos) {
+        const ch = e.changedTouches[0];
+        const dx = ch.clientX - touchStartPos.x;
+        const dy = ch.clientY - touchStartPos.y;
+        if (Math.sqrt(dx*dx + dy*dy) < 10) {
+          e.preventDefault();
+          selectConcept(id);
+        }
+      }
+      touchStartPos = null;
+    });
   });
 
   updateStats();
@@ -700,9 +741,14 @@ function showTooltip(e, id) {
   tooltip.querySelector('.tt-def').textContent = c.def;
   tooltip.classList.add('visible');
   moveTooltip(e);
-  // Scale node
+  // Fix 5: scale around node center using SVG transform
   const g = svg.querySelector(`.node[data-id="${id}"]`);
-  if (g) g.style.transform = `scale(1.3)`;
+  if (g) {
+    const circle = g.querySelector('circle');
+    const ncx = parseFloat(circle.getAttribute('cx'));
+    const ncy = parseFloat(circle.getAttribute('cy'));
+    g.setAttribute('transform', `translate(${ncx},${ncy}) scale(1.3) translate(${-ncx},${-ncy})`);
+  }
 }
 function moveTooltip(e) {
   const x = (e.touches ? e.touches[0].clientX : e.clientX) + 14;
@@ -712,7 +758,8 @@ function moveTooltip(e) {
 }
 function hideTooltip() {
   tooltip.classList.remove('visible');
-  svg.querySelectorAll('.node').forEach(g => g.style.transform = '');
+  // Fix 5: clear SVG transform attribute instead of CSS transform
+  svg.querySelectorAll('.node').forEach(g => g.removeAttribute('transform'));
 }
 
 function selectConcept(id) {
@@ -793,20 +840,19 @@ function openPanel(id) {
   panel.classList.add('open');
 }
 
+// Fix 4: closePanel only closes UI — does NOT call render()
 function closePanel() {
   panel.classList.remove('open');
-  selected = null;
-  render();
 }
 
-document.getElementById('panel-close').onclick = closePanel;
+document.getElementById('panel-close').onclick = () => { selected = null; render(); closePanel(); };
 svg.addEventListener('click', e => { if (e.target === svg || e.target.tagName === 'rect') { selected = null; render(); closePanel(); } });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePanel(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { selected = null; render(); closePanel(); } });
 
-// Zoom + pan
+// Zoom + pan — use requestViewUpdate() instead of render() (Fix 1, Fix 3)
 let dragging = false, dragX = 0, dragY = 0;
 wrap.addEventListener('mousedown', e => { if (e.target.closest('.node')) return; dragging = true; dragX = e.clientX; dragY = e.clientY; });
-window.addEventListener('mousemove', e => { if (!dragging) return; panX += (e.clientX - dragX) / zoom; panY += (e.clientY - dragY) / zoom; dragX = e.clientX; dragY = e.clientY; render(); });
+window.addEventListener('mousemove', e => { if (!dragging) return; panX += (e.clientX - dragX) / zoom; panY += (e.clientY - dragY) / zoom; dragX = e.clientX; dragY = e.clientY; requestViewUpdate(); });
 window.addEventListener('mouseup', () => { dragging = false; });
 
 wrap.addEventListener('wheel', e => {
@@ -818,7 +864,7 @@ wrap.addEventListener('wheel', e => {
   zoom = Math.max(0.3, Math.min(5, zoom));
   panX += mx * (1/oldZ - 1/zoom);
   panY += my * (1/oldZ - 1/zoom);
-  render();
+  requestViewUpdate();
 }, {passive: false});
 
 // Touch zoom/pan
@@ -828,7 +874,9 @@ wrap.addEventListener('touchstart', e => {
     const dx = e.touches[0].clientX - e.touches[1].clientX;
     const dy = e.touches[0].clientY - e.touches[1].clientY;
     touchDist0 = Math.sqrt(dx*dx+dy*dy);
-    touches0 = {zoom, panX, panY};
+    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    touches0 = {zoom, panX, panY, midX, midY};
   } else if (e.touches.length === 1) {
     touchPan0 = {x: e.touches[0].clientX, y: e.touches[0].clientY, px: panX, py: panY};
   }
@@ -839,12 +887,19 @@ wrap.addEventListener('touchmove', e => {
     const dx = e.touches[0].clientX - e.touches[1].clientX;
     const dy = e.touches[0].clientY - e.touches[1].clientY;
     const d = Math.sqrt(dx*dx+dy*dy);
-    zoom = Math.max(0.3, Math.min(5, touches0.zoom * d / touchDist0));
-    render();
+    // Fix 6: adjust pan to keep pinch center stable
+    const oldZ = zoom;
+    const newZ = Math.max(0.3, Math.min(5, touches0.zoom * d / touchDist0));
+    const mx = touches0.midX - cx;
+    const my = touches0.midY - cy;
+    panX = touches0.panX + mx * (1/touches0.zoom - 1/newZ);
+    panY = touches0.panY + my * (1/touches0.zoom - 1/newZ);
+    zoom = newZ;
+    requestViewUpdate();
   } else if (e.touches.length === 1 && touchPan0) {
     panX = touchPan0.px + (e.touches[0].clientX - touchPan0.x) / zoom;
     panY = touchPan0.py + (e.touches[0].clientY - touchPan0.y) / zoom;
-    render();
+    requestViewUpdate();
   }
 }, {passive: false});
 wrap.addEventListener('touchend', () => { touches0 = null; touchPan0 = null; });
