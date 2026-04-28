@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Topological Theory of Things</title>
+<meta name="description" content="A relational, pluralistic ontology — from phenomenology to data structures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
+  --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: 'Crimson Pro', Georgia, serif; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+h1 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(28px, 5vw, 42px); color: var(--cream);
+  letter-spacing: 0.01em; line-height: 1.15; margin-bottom: 16px;
+}
+h2 {
+  font-family: 'Gloock', serif; font-weight: 400;
+  font-size: clamp(20px, 3vw, 26px); color: var(--cream);
+  margin: 48px 0 16px; padding-top: 32px;
+  border-top: 1px solid var(--line2);
+}
+h2:first-of-type { border-top: none; margin-top: 32px; padding-top: 0; }
+p { margin-bottom: 1em; font-weight: 300; font-size: 17px; }
+.subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(15px, 2vw, 19px); color: var(--cream2);
+  line-height: 1.5; max-width: 600px; margin-bottom: 40px;
+}
+.content { max-width: 680px; margin: 0 auto; padding: 48px 28px 80px; }
+nav {
+  padding: 16px 28px; display: flex; justify-content: space-between;
+  align-items: center; max-width: 1100px; margin: 0 auto;
+}
+.back-link {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: var(--silver);
+}
+.back-link:hover { color: var(--gold); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--silver);
+}
+.nav-links a:hover { color: var(--gold); }
+.ref-list { list-style: none; margin: 16px 0; }
+.ref-list li {
+  padding: 10px 0; border-bottom: 1px solid var(--line2);
+  font-size: 15px; font-weight: 300;
+}
+.ref-list li:last-child { border-bottom: none; }
+.ref-list .ref-title { font-weight: 400; }
+.ref-list .ref-meta { font-size: 13px; color: var(--cream2); }
+.essay-link {
+  display: block; padding: 8px 0; font-size: 16px; font-weight: 400;
+}
+.essay-desc {
+  display: block; font-size: 13px; font-weight: 300;
+  color: var(--cream2); margin-top: 2px;
+}
+blockquote {
+  border-left: 2px solid var(--gold-dim); margin: 20px 0; padding: 8px 20px;
+  font-style: italic; color: var(--cream2); font-size: 16px;
+}
+footer {
+  border-top: 1px solid var(--line2); padding: 20px 28px;
+  max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .content { padding: 32px 16px 60px; }
+  footer { flex-direction: column; gap: 8px; padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="back-link">&larr; topological.eu</a>
+  <div class="nav-links">
+    <a href="/essays/">essays</a>
+    <a href="/paper/">paper</a>
+  </div>
+</nav>
+
+<div class="content">
+
+<h1>About TTT</h1>
+<p class="subtitle">A relational, pluralistic ontology &mdash; from phenomenology to data structures.</p>
+
+<p>The Topological Theory of Things (TTT) is a philosophical program that develops a <em>relational situational ontology</em>: a formal account of reality in which things are constituted by their relations, not by hidden essences or intrinsic properties. It is flat &mdash; no viewpoint is privileged. It is pluralistic &mdash; the same world admits multiple valid descriptions at different scales. And it is formally precise &mdash; the core is machine-checked in <a href="https://leanprover-community.github.io">Lean 4</a>.</p>
+
+<p>TTT grows from a specific philosophical lineage. It takes seriously the <a href="https://plato.stanford.edu/entries/speculative-realism/">speculative realist</a> commitment to a reality independent of human access, while rejecting the essentialism of <a href="https://plato.stanford.edu/entries/object-oriented-ontology/">object-oriented ontology</a> (OOO). Where Graham Harman posits withdrawn objects with hidden real qualities, TTT shows that the surplus &mdash; the fact that things always exceed any particular encounter &mdash; follows directly from relational depth, without invoking hidden natures. Withdrawal is the shadow cast by partial activation over a relational field, not evidence of a non-relational core.</p>
+
+<p>The philosophical ancestry runs through the <a href="https://hareesh.org/blog/pratyabhijna">Recognition school of Kashmir Shaivism</a> (consciousness as the universe's self-unfolding), <a href="https://plato.stanford.edu/entries/leibniz/">Leibniz</a>'s relational monads, <a href="https://plato.stanford.edu/entries/james/">William James</a>'s radical empiricism and pluralism, <a href="https://plato.stanford.edu/entries/process-philosophy/">Whitehead</a>'s process philosophy, and <a href="https://plato.stanford.edu/entries/badiou/">Badiou</a>'s set-theoretic ontology. From Kashmir Shaivism, that recognition &mdash; not discovery &mdash; is the fundamental epistemological act; from Leibniz, that perspective is constitutive; from James, that reality always exceeds every determination; from Whitehead, that process precedes substance; from Badiou, that the undifferentiated ground precedes every act of differentiation.</p>
+
+<h2>The core idea</h2>
+
+<p>An ontology is a tool for thinking &mdash; a way of carving reality into what can be named, related, and reasoned about. Every ontology makes a wager about what is fundamental. Harman wagers on objects: real and sensual, each with real and sensual qualities, yielding a fourfold structure and sixteen possible tensions. Substance metaphysics wagers on essences &mdash; hidden natures that appearances only partially reveal. TTT wagers on relations. There is nothing beneath or behind them. What a thing <em>is</em> is constituted by what it connects to, what position it occupies in a web of other things. There is no residual thingness left over when you subtract the relations.</p>
+
+<p>This is a pluralistic commitment. If things are constituted by their relations, then the same thing encountered in different situations &mdash; by different observers, at different scales, in different contexts &mdash; is genuinely different each time, because each encounter activates a different subset of its relational character. And yet it is also the same thing: not because of a hidden essence carrying it forward, but because a pattern of relational invariance persists through the variation. TTT calls this pattern <em>topology</em> &mdash; the structure that is preserved when everything else changes.</p>
+
+<p>Identity, on this account, is topological. The marble worn smooth is still the marble; the person who has aged is still the person. Not because of a hidden soul, but because the connectivity &mdash; the relational pattern &mdash; holds through the transformation. When the pattern breaks, identity breaks. The topology/geometry distinction &mdash; invariant structure versus variable instantiation &mdash; does the work that essences were supposed to do, without the metaphysical baggage. And because no single encounter exhausts a thing's relations, every perspective is partial but real. The world is perspectival and multi-scale without collapsing into relativism: there is a fact about every relation, even though no single viewpoint captures all of them.</p>
+
+<h2>From philosophy to data structures</h2>
+
+<p>TTT is not only a philosophical argument. The single-relation ontology is implemented as a working formal system. The companion paper <a href="https://doi.org/10.48550/arXiv.2603.21272"><em>The Library Theorem</em></a> (draft, 2026) proves that organized external structure governs agentic reasoning capacity &mdash; that how you organize knowledge is not incidental but constitutive of what you can think. The belongs-to formalism is verified in Lean 4: all twelve reductions from standard ontological relations to qualified belongs-to are machine-checked.</p>
+
+<p>This formal precision makes TTT applicable where philosophy alone cannot reach. The same ontology that addresses the problem of identity in metaphysics serves as the schema for a working knowledge system. Entities, situations, qualities, and the belongs-to relation map directly onto data structures &mdash; graphs, tables, indices &mdash; that can represent scientific data, institutional knowledge, and world models at arbitrary scale.</p>
+
+<p>TTT is now being applied to the design of ontologies for general world models: representations of reality sufficient to support reasoning and action by artificial agents. The argument is that the right ground for such models is neither propositional (lists of facts about intrinsic properties) nor essentialist (hidden natures behind appearances) but purely relational. A world model built on belongs-to can represent mathematics as easily as social arrangements, can model the same world at different scales, and carries its own perspectival structure without collapsing into relativism.</p>
+
+<h2>Papers</h2>
+
+<ul class="ref-list">
+  <li>
+    <span class="ref-title">Same but Different: A Topological Theory of Things.</span>
+    <span class="ref-meta">Mainen ZF. In preparation.</span>
+    <a href="/paper/same-but-different.pdf" style="font-size: 13px;">[pdf]</a>
+  </li>
+  <li>
+    <span class="ref-title">Belongs-To and Nothing Else: A Mechanically Verified Single-Primitive Relational Ontology.</span>
+    <span class="ref-meta">Mainen ZF. Draft (2026).</span>
+    <a href="/paper/belongs-to-v4.pdf" style="font-size: 13px;">[pdf &mdash; draft]</a>
+  </li>
+  <li>
+    <span class="ref-title">The Library Theorem: How External Organization Governs Agentic Reasoning Capacity.</span>
+    <span class="ref-meta">Mainen ZF. arXiv preprint &mdash; draft (2026).</span>
+    <a href="https://doi.org/10.48550/arXiv.2603.21272" style="font-size: 13px;">[arXiv]</a>
+  </li>
+</ul>
+
+<h2>Essays</h2>
+
+<p style="font-size: 15px; color: var(--cream2);">Shorter pieces developing specific aspects of the program.</p>
+
+<a class="essay-link" href="/essays/reality-is-a-tangle.html">Reality Is a Tangle
+  <span class="essay-desc">Three ancient problems &mdash; similarity, identity, knowledge &mdash; share a single topological solution.</span>
+</a>
+
+<a class="essay-link" href="/essays/one-relation-is-enough.html">One Relation Is Enough
+  <span class="essay-desc">Every standard ontological relation reduces to belongs-to, qualified. Demonstrated for 12 relations across BFO and DOLCE.</span>
+</a>
+
+<a class="essay-link" href="/essays/before-the-first-entity.html">Before the First Entity
+  <span class="essay-desc">Nagarjuna, Badiou, and Turing on the undifferentiated ground that precedes every act of differentiation.</span>
+</a>
+
+<a class="essay-link" href="/essays/the-first-ontologist.html">The First Ontologist
+  <span class="essay-desc">Nagarjuna's dependent origination as the structural ancestor of the single-relation ontology.</span>
+</a>
+
+<a class="essay-link" href="/essays/there-is-no-meta-room.html">There Is No Meta Room
+  <span class="essay-desc">How should we make decisions when we disagree about the rules for making decisions?</span>
+</a>
+
+<a class="essay-link" href="/essays/why-organization-beats-scale.html">Why Organization Beats Scale
+  <span class="essay-desc">Organized retrieval is exponentially faster than unorganized retrieval. From The Library Theorem.</span>
+</a>
+
+<a class="essay-link" href="/essays/your-llm-is-a-finite-automaton.html">Your LLM Is a Finite Automaton
+  <span class="essay-desc">A transformer with a fixed context window is a finite automaton. External memory does what chain-of-thought cannot.</span>
+</a>
+
+<h2>Philosophical context</h2>
+
+<p style="font-size: 15px;">Key external references that situate TTT within the broader conversation.</p>
+
+<ul class="ref-list">
+  <li>
+    <span class="ref-title">Kshemarāja, <em>Pratyabhijnahrdayam</em> (c. 1000 CE)</span>
+    <span class="ref-meta">The Recognition Sutras of Kashmir Shaivism. Consciousness as the universe's self-unfolding &mdash; neither monist nor dualist. The tradition that independently arrived at the same ontological structure as TTT, from the opposite direction. Via <a href="https://hareesh.org/blog/pratyabhijna">Christopher Wallis's translation</a>.</span>
+  </li>
+  <li>
+    <span class="ref-title">Leibniz, <em>Monadology</em> (1714)</span>
+    <span class="ref-meta">Each monad is a perspective on the relational whole. Identity through perspective, not substance. The ancestor who almost got there.</span>
+  </li>
+  <li>
+    <span class="ref-title">James, <em>A Pluralistic Universe</em> (1909)</span>
+    <span class="ref-meta">"Ever not quite." Reality exceeds every determination. Radical empiricism and conjunctive relations.</span>
+  </li>
+  <li>
+    <span class="ref-title">Whitehead, <em>Process and Reality</em> (1929)</span>
+    <span class="ref-meta">Process precedes substance. Actual occasions are constituted by their relations.</span>
+  </li>
+  <li>
+    <span class="ref-title">Rosen, <em>Life Itself</em> (1991)</span>
+    <span class="ref-meta">A living system is simultaneously its own model. The modeler cannot be excluded from the model.</span>
+  </li>
+  <li>
+    <span class="ref-title">Barfield, <em>Saving the Appearances</em> (1957)</span>
+    <span class="ref-meta">Participation and disenchantment. What was lost when the world became a collection of objects viewed from outside.</span>
+  </li>
+  <li>
+    <span class="ref-title">Badiou, <em>Being and Event</em> (1988)</span>
+    <span class="ref-meta">Ontology is mathematics. Inconsistent multiplicity precedes every structuring operation.</span>
+  </li>
+  <li>
+    <span class="ref-title">Harman, <em>The Quadruple Object</em> (2011)</span>
+    <span class="ref-meta">Object-oriented ontology. TTT's primary interlocutor &mdash; accepts the democratization of ontology, rejects the withdrawn essence.</span>
+  </li>
+  <li>
+    <span class="ref-title">DeLanda, <em>Intensive Science and Virtual Philosophy</em> (2002)</span>
+    <span class="ref-meta">Flat ontology, topology as the basis of individuation. A parallel program with different formal commitments.</span>
+  </li>
+  <li>
+    <span class="ref-title">Gibson, <em>The Ecological Approach to Visual Perception</em> (1979)</span>
+    <span class="ref-meta">Affordances cut across the subjective&ndash;objective dichotomy. Perception as relational, not representational.</span>
+  </li>
+</ul>
+
+</div>
+
+<footer>
+  <span>topological.eu</span>
+  <span><a href="https://zmainen.org" style="color: var(--cream2);">Zach Mainen</a></span>
+</footer>
+
+</body>
+</html>

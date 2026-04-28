@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Topological Theory of Things</title>
+<meta name="description" content="A relational, pluralistic ontology — from phenomenology to data structures.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -13,46 +14,286 @@
   --bg: #0a0e1a; --bg2: #0f1424; --cream: #e8e0d4; --cream2: #7a8580;
   --gold: #c9a96e; --gold-dim: #2a2318; --silver: #8a7898; --line: #1a2028; --line2: #242d38;
 }
-html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--bg); color: var(--cream);
   font-family: 'Crimson Pro', Georgia, serif;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 40px 24px;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
 }
-h1 {
+a { color: var(--gold); text-decoration: none; }
+a:hover { opacity: 0.8; }
+p { margin-bottom: 1.1em; font-weight: 300; font-size: 16px; }
+
+/* Hero */
+.hero {
+  min-height: 80vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 80px 28px 60px;
+}
+.hero h1 {
   font-family: 'Gloock', serif; font-weight: 400;
   font-size: clamp(28px, 5vw, 48px); color: var(--cream);
   margin-bottom: 12px; letter-spacing: 0.01em;
 }
-.subtitle {
+.hero .subtitle {
   font-family: 'Instrument Serif', serif; font-style: italic;
   font-size: clamp(14px, 2vw, 20px); color: var(--cream2);
-  margin-bottom: 48px; max-width: 500px; line-height: 1.5;
+  max-width: 500px; line-height: 1.5; margin-bottom: 48px;
 }
-.nav-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-.nav-links a {
+.hero-nav { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.hero-nav a {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--gold); text-decoration: none;
   padding: 8px 20px; border: 1px solid var(--line2); border-radius: 4px;
   transition: border-color 0.2s, background 0.2s;
 }
-.nav-links a:hover { border-color: var(--gold); background: var(--gold-dim); }
+.hero-nav a:hover { border-color: var(--gold); background: var(--gold-dim); opacity: 1; }
+
+/* Sections */
+.wrap { max-width: 620px; margin: 0 auto; padding: 0 28px; }
+section { padding: 56px 0; border-top: 1px solid var(--line2); }
+.section-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--silver); margin-bottom: 28px; display: block;
+}
+.section-more {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--silver); margin-top: 12px; display: inline-block;
+}
+.section-more:hover { color: var(--gold); opacity: 1; }
+
+/* Essay list */
+.essay-list { list-style: none; }
+.essay-list li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.essay-list li:last-child { border-bottom: none; }
+.essay-list a { display: block; }
+.essay-list a:hover { opacity: 1; }
+.essay-title { font-size: 16px; font-weight: 400; color: var(--cream); }
+.essay-list a:hover .essay-title { color: var(--gold); }
+.essay-desc {
+  font-size: 13px; font-weight: 300; color: var(--cream2);
+  line-height: 1.5; margin-top: 2px;
+}
+
+/* Paper list */
+.paper-list { list-style: none; }
+.paper-list li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.paper-list li:last-child { border-bottom: none; }
+.paper-title { font-size: 15px; font-weight: 400; color: var(--cream); }
+.paper-meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: var(--cream2); margin-top: 2px; letter-spacing: 0.02em;
+}
+.paper-links { display: inline; margin-left: 8px; }
+.paper-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.04em; color: var(--gold);
+}
+.paper-links a:hover { opacity: 0.7; }
+.badge-draft {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 1px 5px; border-radius: 2px;
+  border: 1px solid var(--line2); color: var(--silver);
+  margin-left: 4px; vertical-align: middle;
+}
+
+/* Concept preview */
+.concept-preview { text-align: center; }
+.concept-preview p {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  color: var(--cream2); font-size: 15px; margin-bottom: 24px;
+}
+.concept-pills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 24px; }
+.concept-pill {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.06em; padding: 3px 10px;
+  border: 1px solid var(--line2); border-radius: 12px;
+  color: var(--cream2); transition: border-color 0.2s, color 0.2s;
+}
+.concept-pill:hover { border-color: var(--gold); color: var(--gold); opacity: 1; }
+
+/* Ref list */
+.ref-list { list-style: none; }
+.ref-list li { padding: 6px 0; font-size: 14px; font-weight: 300; }
+.ref-title { font-weight: 400; font-size: 14px; }
+.ref-meta { font-size: 12px; color: var(--cream2); }
+
+/* Footer */
 footer {
-  position: absolute; bottom: 20px;
+  border-top: 1px solid var(--line2); padding: 24px 28px;
+  max-width: 620px; margin: 0 auto; display: flex; justify-content: space-between;
   font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--cream2);
+}
+
+@media (max-width: 600px) {
+  .hero { min-height: 70vh; padding: 48px 20px 32px; }
+  .wrap { padding: 0 20px; }
+  section { padding: 40px 0; }
+  footer { flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
 <body>
-<h1>Topological Theory of Things</h1>
-<p class="subtitle">A relational situational ontology for minds, meanings, and their transmission.</p>
-<div class="nav-links">
-  <a href="/essays/">essays</a>
-  <a href="/paper/">paper</a>
-  <a href="/concepts/">concepts</a>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Topological Theory of Things</h1>
+  <p class="subtitle">A relational, pluralistic ontology &mdash; from phenomenology to data structures.</p>
+  <div class="hero-nav">
+    <a href="#ideas">ideas</a>
+    <a href="#concepts">concepts</a>
+    <a href="#essays">essays</a>
+    <a href="#papers">papers</a>
+    <a href="/about/">about</a>
+  </div>
 </div>
-<footer>topological.eu</footer>
+
+<!-- IDEAS -->
+<section id="ideas">
+<div class="wrap">
+  <span class="section-label">The core idea</span>
+
+  <p>An ontology is a tool for thinking &mdash; a way of carving reality into what can be named, related, and reasoned about. Every ontology makes a wager about what is fundamental. Substance metaphysics wagers on essences. Object-oriented ontology wagers on withdrawn objects. TTT wagers on relations. There is nothing beneath or behind them. What a thing <em>is</em> is constituted by what it connects to, what position it occupies in a web of other things.</p>
+
+  <p>This is a pluralistic commitment. The same thing encountered in different situations is genuinely different each time, because each encounter activates a different subset of its relational character. And yet it is also the same thing &mdash; not because of a hidden essence, but because a pattern of relational invariance persists through the variation. TTT calls this pattern <em>topology</em>: the structure preserved when everything else changes.</p>
+
+  <p>The world is perspectival and multi-scale without collapsing into relativism: there is a fact about every relation, even though no single viewpoint captures all of them.</p>
+
+  <a class="section-more" href="/about/">read more &rarr;</a>
+</div>
+</section>
+
+<!-- CONCEPTS -->
+<section id="concepts">
+<div class="wrap">
+  <span class="section-label">Concepts</span>
+  <div class="concept-preview">
+    <p>The vocabulary of the ontology and how its pieces relate.</p>
+    <div class="concept-pills">
+      <a class="concept-pill" href="/concepts/">the mess</a>
+      <a class="concept-pill" href="/concepts/">belongs-to</a>
+      <a class="concept-pill" href="/concepts/">coils</a>
+      <a class="concept-pill" href="/concepts/">knots</a>
+      <a class="concept-pill" href="/concepts/">topology / geometry</a>
+      <a class="concept-pill" href="/concepts/">quality graph</a>
+      <a class="concept-pill" href="/concepts/">situation</a>
+      <a class="concept-pill" href="/concepts/">identity</a>
+      <a class="concept-pill" href="/concepts/">flattening</a>
+      <a class="concept-pill" href="/concepts/">nesting</a>
+      <a class="concept-pill" href="/concepts/">scale</a>
+      <a class="concept-pill" href="/concepts/">relational surplus</a>
+    </div>
+    <a class="section-more" href="/concepts/">explore the concept graph &rarr;</a>
+  </div>
+</div>
+</section>
+
+<!-- ESSAYS -->
+<section id="essays">
+<div class="wrap">
+  <span class="section-label">Essays</span>
+  <ul class="essay-list">
+    <li><a href="/essays/reality-is-a-tangle.html">
+      <span class="essay-title">Reality Is a Tangle</span>
+      <span class="essay-desc">Three ancient problems &mdash; similarity, identity, knowledge &mdash; share a single topological solution.</span>
+    </a></li>
+    <li><a href="/essays/one-relation-is-enough.html">
+      <span class="essay-title">One Relation Is Enough</span>
+      <span class="essay-desc">Every standard ontological relation reduces to belongs-to, qualified.</span>
+    </a></li>
+    <li><a href="/essays/before-the-first-entity.html">
+      <span class="essay-title">Before the First Entity</span>
+      <span class="essay-desc">What was there before the first thing? Badiou and Turing on the undifferentiated ground.</span>
+    </a></li>
+    <li><a href="/essays/the-first-ontologist.html">
+      <span class="essay-title">The First Ontologist</span>
+      <span class="essay-desc">Dependent origination as the structural ancestor of the single-relation ontology.</span>
+    </a></li>
+    <li><a href="/essays/there-is-no-meta-room.html">
+      <span class="essay-title">There Is No Meta Room</span>
+      <span class="essay-desc">No meta-framework exists to adjudicate between incompatible systems of truth.</span>
+    </a></li>
+    <li><a href="/essays/why-organization-beats-scale.html">
+      <span class="essay-title">Why Organization Beats Scale</span>
+      <span class="essay-desc">Organized retrieval is exponentially faster than unorganized retrieval. From The Library Theorem.</span>
+    </a></li>
+    <li><a href="/essays/your-llm-is-a-finite-automaton.html">
+      <span class="essay-title">Your LLM Is a Finite Automaton</span>
+      <span class="essay-desc">A transformer with a fixed context window has a finite number of states. External memory changes this.</span>
+    </a></li>
+  </ul>
+</div>
+</section>
+
+<!-- PAPERS -->
+<section id="papers">
+<div class="wrap">
+  <span class="section-label">Papers</span>
+  <ul class="paper-list">
+    <li>
+      <div class="paper-title">Same but Different: A Topological Theory of Things</div>
+      <div class="paper-meta">Mainen ZF. In preparation.</div>
+      <div class="paper-links"><a href="/paper/same-but-different.pdf">pdf</a></div>
+    </li>
+    <li>
+      <div class="paper-title">Belongs-To and Nothing Else: A Mechanically Verified Single-Primitive Relational Ontology</div>
+      <div class="paper-meta">Mainen ZF. <span class="badge-draft">draft</span></div>
+      <div class="paper-links"><a href="/paper/belongs-to-v4.pdf">pdf &mdash; draft</a></div>
+    </li>
+    <li>
+      <div class="paper-title">The Library Theorem: How External Organization Governs Agentic Reasoning Capacity</div>
+      <div class="paper-meta">Mainen ZF. arXiv preprint (2026). <span class="badge-draft">draft</span></div>
+      <div class="paper-links"><a href="https://doi.org/10.48550/arXiv.2603.21272">arXiv</a></div>
+    </li>
+  </ul>
+</div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context">
+<div class="wrap">
+  <span class="section-label">Philosophical context</span>
+  <ul class="ref-list">
+    <li>
+      <span class="ref-title">Kshemaraja, <em>Pratyabhijnahrdayam</em> (c. 1000 CE)</span>
+      <span class="ref-meta"> &mdash;The Recognition Sutras of Kashmir Shaivism. Via <a href="https://hareesh.org/blog/pratyabhijna">Christopher Wallis</a>.</span>
+    </li>
+    <li>
+      <span class="ref-title">Leibniz, <em>Monadology</em> (1714)</span>
+      <span class="ref-meta"> &mdash;Identity through perspective, not substance.</span>
+    </li>
+    <li>
+      <span class="ref-title">James, <em>A Pluralistic Universe</em> (1909)</span>
+      <span class="ref-meta"> &mdash;Reality exceeds every determination. Radical empiricism.</span>
+    </li>
+    <li>
+      <span class="ref-title">Barfield, <em>Saving the Appearances</em> (1957)</span>
+      <span class="ref-meta"> &mdash;Participation and disenchantment.</span>
+    </li>
+    <li>
+      <span class="ref-title">Rosen, <em>Life Itself</em> (1991)</span>
+      <span class="ref-meta"> &mdash;The modeler cannot be excluded from the model.</span>
+    </li>
+    <li>
+      <span class="ref-title">Harman, <em>The Quadruple Object</em> (2011)</span>
+      <span class="ref-meta"> &mdash;Primary interlocutor. TTT accepts the democratization, rejects the withdrawn essence.</span>
+    </li>
+    <li>
+      <span class="ref-title">DeLanda, <em>Intensive Science and Virtual Philosophy</em> (2002)</span>
+      <span class="ref-meta"> &mdash;Flat ontology, topology as individuation.</span>
+    </li>
+  </ul>
+</div>
+</section>
+
+<footer>
+  <span>topological.eu</span>
+  <span><a href="https://zmainen.org" style="color: var(--cream2);">Zach Mainen</a></span>
+</footer>
+
 </body>
 </html>
